@@ -1,0 +1,125 @@
+= entity_info_form [project, ticket] do |form|
+  %header.page-header
+    %h1
+      %span.editable-value
+        = ticket.name
+        %small= ticket.identifier
+      %span.editable-form
+        = form.input_field :name, placeholder: 'Ticket name'
+
+    %nav.actions
+      - unless ticket.new_record?
+        - unless ticket.closed?
+          - if ticket.in_progress?
+            = link_to icon_tag(:pause, 'Stop'), stop_progress_project_ticket_path(ticket.project, ticket), method: :post, class: 'btn btn-small'
+          - else
+            = link_to icon_tag(:play, 'Start'), start_progress_project_ticket_path(ticket.project, ticket), method: :post, class: 'btn btn-small'
+          = link_to icon_tag(:stop, 'Close', color: :white), close_project_ticket_path(ticket.project, ticket), method: :post, class: 'btn btn-danger btn-small', confirm: 'Are you sure you want to close this ticket?'
+        = link_to icon_tag('edit', 'Edit', color: :white), '#', class: 'btn btn-info btn-small', :'data-start-editing' => true
+        = link_to icon_tag('remove', 'Cancel'), '#', class: 'btn btn-small', :'data-cancel-editing' => true
+      = form.button :submit, icon_tag('ok', 'Save', color: :white), class: 'btn btn-info btn-small'
+
+  - if ticket.closed?
+    %div.alert.alert-block.alert-danger
+      %h4.alert-heading This ticket is closed
+      %p
+        This ticket is currently flagged as closed. If you want to reopen this ticket, you can do so below.
+      %p
+        = link_to 'Reopen ticket', reopen_project_ticket_path(ticket.project, ticket), method: :post, confirm: 'Are you sure you want to reopen this ticket?', class: 'btn btn-small'
+
+  %div.grid
+    %div.grid-6
+      %div.well.description
+        %span.editable-value
+          - if ticket.description.blank?
+            %span.muted No description set.
+          - else
+            = format_description_text(ticket.description)
+        %span.editable-form
+          = form.input_field :description, as: :text, placeholder: 'Description'
+      - unless ticket.new_record?
+        %div.info-block
+          %span.editable-value
+            %div.btn-group
+
+    %dic.grid-6
+      %div.grid
+        %div.grid-6
+          %div.info-block.project
+            %h6 Project
+            = link_to project.name, project
+          %div.info-block.category
+            = render partial: '/categories/entity_category', locals: { entity: ticket, form: form, include_blank: false }
+          %span.editable-value
+            %div.info-block.reporter
+              %h6 Reporter
+              = link_to ticket.reporter.name, ticket.reporter
+          %div.info-block.assignee
+            %h6 Assignee
+            %span.editable-value
+              - if ticket.user.blank?
+                %span.muted No assignee
+              - else
+                = link_to ticket.user.name, ticket.user
+            %span.editable-form
+              = form.input_field :user_id, collection: users, include_blank: true
+          %div.info-block.due-on
+            %h6 Due on
+            %span.editable-value
+              - if ticket.due_on.blank?
+                %span.muted Not set
+              - else
+                = l(ticket.due_on, format: :short)
+            %span.editable-form
+              = form.input_field :due_on, as: :date, placeholder: 'Date'
+          %span.editable-value
+            %div.info-block.status
+              %h6 Status
+              = ticket_status(ticket)
+
+        %div.grid-6
+          %div.info-block.milestone
+            %h6 Milestone
+            %span.editable-value
+              - if ticket.milestone.blank?
+                %span.muted No milestone
+              - else
+                = link_to ticket.milestone.name, project_milestone_path(project, ticket.milestone)
+            %span.editable-form
+              = form.input_field :milestone_id, collection: milestones, include_blank: 'No milestone'
+
+          %div.info-block.priority
+            %h6 Priority
+            %span.editable-value
+              - if ticket.priority.blank?
+                %span.muted No priority
+              - else
+                = ticket_priority(ticket)
+            %span.editable-form
+              = form.input_field :priority, collection: ticket_priority_collection, include_blank: 'No priority'
+            %h6 Component
+            %span.editable-value
+              - if ticket.component.blank?
+                %span.muted None
+              - else
+                = ticket.component.name
+            %span.editable-form
+              = form.input_field :component_id, collection: components, include_blank: 'None'
+          %div.info-block.time-estimate
+            %h6 Time estimate
+            %span.editable-value
+              - if ticket.estimated_minutes.blank?
+                %span.muted No estimate
+              - else
+                = ticket_estimate(ticket)
+            %span.editable-form
+              = form.input_field :estimated_minutes
+              %span.help-inline
+                minutes
+          %div.info-block.worked-time
+            %span.editable-value
+              %h6 Time spent in progress
+              - if ticket.worked_minutes == 0
+                %em No time spent in progress.
+              - else
+                = ticket_worked_time(ticket)

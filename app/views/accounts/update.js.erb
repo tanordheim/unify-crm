@@ -1,0 +1,7 @@
+$.closeModal();
+<% if account.errors.any? -%>
+  $.modal("Modify account", "<%= escape_javascript(render('form')) %>");
+<% else -%>
+  $('table.accounts-table').replaceWith("<%= escape_javascript(render('accounts')) %>");
+  $('tr[data-account-id="<%= account.id %>"]').effect('highlight', {}, 500);
+<% end -%>

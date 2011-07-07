@@ -1,0 +1,10 @@
+%tr
+  %td.identifier= ledger_transaction_line.identifier
+  %td.account== #{ledger_transaction_line.account.number} - #{ledger_transaction_line.account.name}
+  %td.description= ledger_transaction_line.description
+  %td.debit
+    - unless ledger_transaction_line.debit.blank?
+      = format_currency(ledger_transaction_line.debit)
+  %td.credit
+    - unless ledger_transaction_line.credit.blank?
+      = format_currency(ledger_transaction_line.credit)

@@ -1,0 +1,64 @@
+%div#project-view
+  = render 'sidebar'
+  = render 'entity_info'
+
+  %h2 Overview
+  %div.grid
+    %div.grid-4
+      %h6 Released
+      - if released_milestones.empty?
+        %span.muted No milestones have been released for this project.
+      - else
+        %table.table.milestones-table
+          %thead
+            %tr
+              %th.name Name
+              %th.closed-at Date
+          %tbody
+            - released_milestones.each do |milestone|
+              %tr
+                %td.name= link_to milestone.name, project_milestone_path(milestone.project, milestone)
+                %td.closed-at= l(milestone.closed_at.to_date, format: :long)
+
+    %div.grid-4
+      %h6 In Development
+      - if pending_milestones.empty?
+        %span.muted No milestones are in development for this project.
+      - else
+        %table.table.milestones-table
+          %thead
+            %tr
+              %th.name Name
+              %th.ends-on Ends on
+              %th.ticket-progress Progress
+          %tbody
+            - pending_milestones.each do |milestone|
+              %tr
+                %td.name= link_to milestone.name, project_milestone_path(milestone.project, milestone)
+                %td.ends-on= l(milestone.ends_on, format: :short)
+                %td.ticket-progress
+                  = ticket_progress_bar(milestone.ticket_progress)
+
+    %div.grid-4
+      %h6 Next
+      - if upcoming_milestones.empty?
+        %span.muted No future milestones are scheduled for this project.
+      - else
+        %table.table.milestones-table
+          %thead
+            %tr
+              %th.name Name
+              %th.starts-on Starts on
+              %th.ticket-progress Progress
+          %tbody
+            - upcoming_milestones.each do |milestone|
+              %tr
+                %td.name= link_to milestone.name, project_milestone_path(milestone.project, milestone)
+                %td.starts-on= l(milestone.starts_on, format: :short)
+                %td.ticket-progress
+                  = ticket_progress_bar(milestone.ticket_progress)
+
+  %h2
+    Comments
+    %small= link_to 'Add a comment', new_comment_path_for(project), remote: true, class: 'btn btn-mini'
+  = render '/comments/comments'

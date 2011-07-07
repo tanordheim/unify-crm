@@ -1,0 +1,9 @@
+%h6 Organization
+%span.editable-value
+  - if entity.organization.blank?
+    %span.muted No organization assigned
+  - else
+    %table.contacts-table
+      = render partial: '/organizations/organization', locals: { organization: entity.organization }
+%span.editable-form
+  = form.input_field :organization_id, as: :organization

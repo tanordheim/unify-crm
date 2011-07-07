@@ -1,0 +1,6 @@
+%li.field
+  - if form.object.new_record?
+    = form.input :attachment
+  - else
+    = form.object.filename
+  = link_to icon_tag('trash'), '#', :'data-destroy-association' => true

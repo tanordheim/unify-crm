@@ -1,0 +1,4 @@
+%tr
+  %td.date= l(invoice_payment.paid_on, format: :long)
+  %td.amount= format_currency(invoice_payment.amount)
+  %td.payment-form= invoice_payment.payment_form.name

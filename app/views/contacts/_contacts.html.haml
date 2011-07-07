@@ -1,0 +1,6 @@
+%table.table.contacts-table
+  %tbody
+    = render self.contacts
+    %tr.pagination
+      %td{colspan: 2}
+        = paginate self.contacts, remote: true

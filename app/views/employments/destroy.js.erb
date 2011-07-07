@@ -1,0 +1,9 @@
+if ($('li[data-employment-id]').length > 0) { // Person view.
+  $('li[data-employment-id="<%= employment.id.to_s %>"]').slideUp('fast', function() {
+    $.getScript('/people/<%= employment.person.id.to_s %>/employments');
+  });
+} else if ($('tr[data-employment-id]').length > 0) { // Organization view.
+  $('tr[data-employment-id="<%= employment.id.to_s %>"]').slideUp('fast', function() {
+    $.getScript('/organizations/<%= employment.organization.id.to_s %>/employees');
+  });
+}

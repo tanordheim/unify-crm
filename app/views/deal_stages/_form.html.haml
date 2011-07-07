@@ -1,0 +1,10 @@
+= simple_form_for stage, remote: true do |f|
+  %div.grid
+    %div.grid-6
+      = f.input :name
+      = f.input :percent, as: :percentage
+    %div.grid-6
+      = f.input :color, as: :color
+
+  %div.modal-footer
+    = f.button :submit, 'Save', class: 'btn btn-primary'

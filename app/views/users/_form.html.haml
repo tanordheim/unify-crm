@@ -1,0 +1,34 @@
+= simple_form_for user do |f|
+
+  %div.grid
+    %div.grid-8
+      = f.input :username
+    %div.grid-8
+      = f.input :title
+
+  %div.grid
+    %div.grid-8
+      = f.input :first_name
+    %div.grid-8
+      = f.input :last_name
+
+  %div.grid
+    = render partial: '/phone_numbers/form', locals: { f: f }
+    = render partial: '/email_addresses/form', locals: { f: f }
+
+  %div.grid
+    = render partial: '/websites/form', locals: { f: f }
+    = render partial: '/instant_messengers/form', locals: { f: f }
+
+  %div.grid
+    = render partial: '/twitter_accounts/form', locals: { f: f }
+    = render partial: '/addresses/form', locals: { f: f }
+
+  %div.grid
+    %div.grid-8
+      = f.input :password
+    %div.grid-8
+      = f.input :password_confirmation
+
+  %div.actions
+    = f.button :submit, 'Save'

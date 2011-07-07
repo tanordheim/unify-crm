@@ -1,0 +1,55 @@
+%div#dashboard-view
+  %div.grid
+    %div.grid-9
+      %h2 Tickets assigned to me
+      - if my_tickets.empty?
+        %span.muted There are no outstanding tickets assigned to you.
+      - else
+        %table#my-tickets.table.tickets-table
+          %thead
+            %tr
+              %th.id ID
+              %th.name Name
+              %th.priority Priority
+              %th.status Status
+              %th.due-on Due on
+              %th.row-actions
+          %tbody
+            = render partial: '/tickets/dashboard_ticket', collection: my_tickets
+            %tr.pagination
+              %td{colspan: 10}
+                = paginate my_tickets, remote: true, param_name: :my_tickets_page
+
+      %h2 Tickets reported by me
+      - if reported_tickets.empty?
+        %span.muted There are no outstanding tickets reported by you.
+      - else
+        %table#reported-tickets.table.tickets-table
+          %thead
+            %tr
+              %th.id ID
+              %th.name Name
+              %th.priority Priority
+              %th.status Status
+              %th.due-on Due on
+              %th.row-actions
+          %tbody
+            = render partial: '/tickets/dashboard_ticket', collection: reported_tickets
+            %tr.pagination
+              %td{colspan: 9}
+                = paginate reported_tickets, remote: true, param_name: :reported_tickets_page
+
+    %div.grid-3#upcoming-events
+      %h2 Upcoming events
+      - if todays_events.empty? && this_weeks_events.empty? && next_weeks_events.empty?
+        %span.muted There are no events for you within the next two weeks.
+      - else
+        - unless todays_events.empty?
+          %h6 Today
+          = render partial: '/events/events', locals: { events: todays_events }
+        - unless this_weeks_events.empty?
+          %h6 This week
+          = render partial: '/events/events', locals: { events: this_weeks_events }
+        - unless next_weeks_events.empty?
+          %h6 Next week
+          = render partial: '/events/events', locals: { events: next_weeks_events }

@@ -1,0 +1,34 @@
+= render 'sidebar'
+
+%header.page-header
+  %h1 Instance settings
+
+= simple_form_for instance, url: instance_path, method: :put do |f|
+  %div.tabbable
+    %ul.nav.nav-tabs
+      %li.active= link_to 'Organization', '#organization-tab', :'data-toggle' => 'tab'
+      %li= link_to 'Billing', '#billing-tab', :'data-toggle' => 'tab'
+
+    %div.tab-content
+      %div.tab-pane.active#organization-tab
+        = f.simple_fields_for :organization do |of|
+          = of.input :name
+
+          %div.grid
+            %div.grid-6
+              = of.input :street_name
+              = of.input :city
+            %div.grid-6
+              = of.input :zip_code
+              = of.input :country
+
+      %div.tab-pane#billing-tab
+        = f.simple_fields_for :organization do |of|
+          %div.grid
+            %div.grid-6
+              = of.input :vat_number
+            %div.grid-6
+              = of.input :bank_account_number
+
+  %div.form-actions
+    = f.button :submit, 'Update settings', class: 'btn btn-primary'

@@ -1,0 +1,3 @@
+$('li[data-instant-messenger-id="<%= instant_messenger.id.to_s %>"]').slideUp('fast', function() {
+  $.getScript('/<%= instant_messageable_type.to_s.pluralize %>/<%= instant_messageable_id %>/instant_messengers');
+});

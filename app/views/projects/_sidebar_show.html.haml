@@ -1,0 +1,4 @@
+%li{:class => controller_name == 'projects' ? 'current' : nil}= link_to 'Project', project_path(project)
+%li{:class => controller_name == 'milestones' ? 'current' : nil}= link_to 'Milestones', project_milestones_path(project)
+%li{:class => controller_name == 'tickets' ? 'current' : nil}= link_to 'Tickets', project_tickets_path(project)
+%li{:class => controller_name == 'pages' ? 'current' : nil}= link_to 'Pages', project_pages_path(project)

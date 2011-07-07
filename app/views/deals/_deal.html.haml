@@ -1,0 +1,21 @@
+%tr.deal
+  %td.name
+    = category_label(deal.category)
+    = link_to deal.name, deal
+  %td.organization= link_to deal.organization.name, deal.organization
+  %td.responsible= link_to deal.user.username, deal.user
+  %td.amount
+    - if deal.price.blank?
+      None
+    - else
+      = format_currency(deal.total_value)
+      = deal_value_details(deal)
+  %td.stage
+    = deal_stage_label(deal.stage)
+  %td.probability== #{deal.probability}%
+  %td.expecting-close-on
+    - if deal.expecting_close_on.blank?
+      Not set
+    - else
+      = l(deal.expecting_close_on, format: :short)
+

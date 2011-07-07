@@ -1,0 +1,29 @@
+%tr{:class => ticket_css_class(ticket), :'data-ticket-id' => ticket.id}
+  %td.select= check_box_tag :'ticket_id[]', ticket.id.to_s
+  %td.id= link_to ticket.identifier, project_ticket_path(ticket.project, ticket)
+  %td.name= ticket.name
+  %td.milestone
+    - unless ticket.milestone.blank?
+      = link_to ticket.milestone.name, project_milestone_path(ticket.milestone.project, ticket.milestone)
+  %td.category
+    = category_label(ticket.category)
+  %td.component
+    - if ticket.component.blank?
+      %span.muted None
+    - else
+      = ticket.component.name
+  %td.priority
+    - if ticket.priority.blank?
+      %span.muted Not set
+    - else
+      = ticket_priority(ticket)
+  %td.estimate= ticket_estimate_field(ticket, format: :short)
+  %td.status= ticket_status(ticket)
+  %td.due-on= ticket_due_on_field(ticket)
+  %td.assignee
+    - if ticket.user.blank?
+      %span.muted Not set
+    - else
+      = link_to ticket.user.username, ticket.user
+  %td.row-actions
+    = render partial: '/tickets/ticket_state_actions', locals: { ticket: ticket }

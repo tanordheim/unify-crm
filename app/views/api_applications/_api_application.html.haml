@@ -1,0 +1,9 @@
+%tr{:'data-api-application-id' => api_application.id}
+  %td.name= api_application.name
+  %td.key= api_application.key
+  %td.token= api_application.token
+  %td.sso-callback-url= api_application.sso_callback_url
+  %td.sso-enabled= api_application.sso_enabled? ? 'Yes' : 'No'
+  %td.row-actions
+    = link_to 'Edit', [:edit, api_application], remote: true, class: 'edit-action'
+    = link_to 'Delete', api_application, remote: true, method: :delete, class: 'delete-action', confirm: 'Are you sure you want to remove this API application? Any external applications using this application token will stop working.'

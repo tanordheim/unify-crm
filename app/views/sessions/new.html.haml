@@ -1,0 +1,24 @@
+= form_tag session_path do
+
+  %fieldset
+    %legend Log in to Unify
+
+    = render_most_important_flash
+
+    .grid
+      .grid-6
+        .input.string
+          = label_tag :username
+          = text_field_tag :username
+
+      .grid-6
+        .input.password
+          = label_tag :password
+          = password_field_tag :password
+
+    .form-actions
+      .grid
+        .grid-8
+          &nbsp;
+        .grid-4
+          = submit_tag 'Log in', class: 'btn btn-primary'

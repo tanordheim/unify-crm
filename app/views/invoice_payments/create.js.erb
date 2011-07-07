@@ -1,0 +1,6 @@
+$.closeModal();
+<% if payment.errors.any? -%>
+  $.modal("Add invoice payment", "<%= escape_javascript(render('form')) %>");
+<% else -%>
+  window.location.reload();
+<% end -%>

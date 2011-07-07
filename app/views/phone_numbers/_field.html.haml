@@ -1,0 +1,4 @@
+%li
+  = form.input_field :number, placeholder: 'Number', class: 'number'
+  = form.input_field :location, collection: phone_number_location_collection, include_blank: false, class: 'location'
+  = link_to icon_tag('trash'), '#', :'data-destroy-association' => true

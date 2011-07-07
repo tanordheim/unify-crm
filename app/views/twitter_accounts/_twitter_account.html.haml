@@ -1,0 +1,3 @@
+%li{:'data-twitter-account-id' => twitter_account.id.to_s}
+  = link_to "@#{twitter_account.username}", "http://twitter.com/#{twitter_account.username}"
+  %small.muted= twitter_account_location_name(twitter_account.location_name)

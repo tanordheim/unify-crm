@@ -1,0 +1,18 @@
+%table.ledger-transaction-lines-form
+  %thead
+    %tr
+      %th.account Account
+      %th.description Description
+      %th.debit Debit
+      %th.credit Credit
+      %th.row-actions
+  %tbody
+    = form.simple_fields_for :lines do |l_form|
+      = render partial: '/ledger_transaction_lines/field', locals: { form: l_form }
+    %tr.add-first{:'data-association' => 'lines'}
+      %td{colspan: 5}= link_to 'Add a line', '#'
+    %tr.add-another{:'data-association' => 'lines'}
+      %td{colspan: 5}= link_to 'Add another', '#'
+
+= content_for :form_templates do
+  = form_template(form, :lines, partial: '/ledger_transaction_lines/field')

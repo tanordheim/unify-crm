@@ -1,0 +1,8 @@
+%div#deal-view
+  = render 'sidebar'
+  = render 'entity_info'
+
+  %h2
+    Comments
+    %small= link_to 'Add a comment', new_comment_path_for(deal), remote: true, class: 'btn btn-mini'
+  = render '/comments/comments'

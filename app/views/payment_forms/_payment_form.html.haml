@@ -1,0 +1,5 @@
+%tr{:'data-payment-form-id' => payment_form.id}
+  %td.name= payment_form.name
+  %td.account== #{payment_form.account.number} - #{payment_form.account.name}
+  %td.row-actions
+    = link_to 'Edit', [:edit, payment_form], remote: true, class: 'edit-action'

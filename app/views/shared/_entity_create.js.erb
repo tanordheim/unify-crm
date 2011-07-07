@@ -1,0 +1,8 @@
+<% if model.errors.any? -%>
+  $('.entity-info').replaceWith("<%= escape_javascript(render("/#{model.class.name.underscore.pluralize}/entity_info")) %>");
+<% else -%>
+  $.pushUrl("<%= escape_javascript(model.respond_to?(:name) ? model.name : model.identifier) %>", "<%= escape_javascript(url_for(model)) %>");
+  $('#<%= model.class.name.underscore %>-view').replaceWith("<%= escape_javascript(render("/#{model.class.name.underscore.pluralize}/show")) %>");
+  $('.well.content-navigation').replaceWith("<%= escape_javascript(yield(:sidebar)) %>");
+  $.configureFilters();
+<% end -%>

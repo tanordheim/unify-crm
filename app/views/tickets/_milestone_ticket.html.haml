@@ -1,0 +1,26 @@
+%tr{:class => ticket_css_class(milestone_ticket), :'data-ticket-id' => milestone_ticket.id}
+  %td.select= check_box_tag :'ticket_id[]', milestone_ticket.id.to_s
+  %td.id= link_to milestone_ticket.identifier, project_ticket_path(milestone_ticket.project, milestone_ticket)
+  %td.name= milestone_ticket.name
+  %td.category
+    = category_label(milestone_ticket.category)
+  %td.component
+    - if milestone_ticket.component.blank?
+      %span.muted None
+    - else
+      = milestone_ticket.component.name
+  %td.priority
+    - if milestone_ticket.priority.blank?
+      %span.muted Not set
+    - else
+      = ticket_priority(milestone_ticket)
+  %td.estimate= ticket_estimate_field(milestone_ticket, format: :short)
+  %td.status= ticket_status(milestone_ticket)
+  %td.due-on= ticket_due_on_field(milestone_ticket)
+  %td.assignee
+    - if milestone_ticket.user.blank?
+      %span.muted Not set
+    - else
+      = link_to milestone_ticket.user.username, milestone_ticket.user
+  %td.row-actions
+    = render partial: '/tickets/ticket_state_actions', locals: { ticket: milestone_ticket }

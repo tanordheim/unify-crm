@@ -1,0 +1,28 @@
+defaults: &defaults
+  identity_map_enabled: false
+  allow_dynamic_fields: false
+
+development:
+  <<: *defaults
+  autocreate_indexes: true
+  sessions:
+    default:
+      database: unify_dev
+      hosts:
+       - mongodb
+test:
+  <<: *defaults
+  autocreate_indexes: true
+  sessions:
+    default:
+      database: unify_test
+      hosts:
+       - mongodb
+
+production:
+  <<: *defaults
+  sessions:
+    default:
+      database: unify_production
+      hosts:
+       - mongodb

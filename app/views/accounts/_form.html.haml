@@ -1,0 +1,14 @@
+= simple_form_for account, remote: true do |f|
+  %div.grid
+    %div.grid-6
+      = f.input :name
+    %div.grid-6
+      = f.input :number
+  %div.grid
+    %div.grid-6
+      = f.input :type, collection: account_type_collection, include_blank: false
+    %div.grid-6
+      = f.input :tax_code_id, collection: tax_codes
+
+  %div.modal-footer
+    = f.button :submit, account.new_record? ? 'Create account' : 'Update account', class: 'btn btn-primary'

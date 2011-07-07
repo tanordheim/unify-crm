@@ -1,0 +1,7 @@
+%p Select the format of the generated PDF file.
+%ul
+  %li= link_to 'Standard invoice template', invoice_path(invoice, format: :pdf, template: 'standard')
+  %li= link_to 'F90 form', invoice_path(invoice, format: :pdf, template: 'f90')
+
+%div.modal-footer
+  = link_to 'Close', '#', class: 'btn', :'data-dismiss' => 'modal'

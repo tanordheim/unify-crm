@@ -1,0 +1,10 @@
+- include_blank = true if include_blank.nil?
+%h6 Category
+%span.editable-value
+  - if entity.category.blank?
+    %span.muted No category set
+  - else
+    Categorized as
+    = category_label(entity.category)
+%span.editable-form
+  = form.input_field :category_id, collection: categories, include_blank: include_blank

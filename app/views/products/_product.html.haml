@@ -1,0 +1,7 @@
+%tr{:'data-product-id' => product.id}
+  %td.key= product.key
+  %td.name= product.name
+  %td.account== #{product.account.number} - #{product.account.name}
+  %td.price= format_currency(product.price)
+  %td.row-actions
+    = link_to 'Edit', edit_product_path(product), remote: true, class: 'edit-action'

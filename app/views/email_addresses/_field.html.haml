@@ -1,0 +1,4 @@
+%li
+  = form.input_field :address, placeholder: 'Address', class: 'address'
+  = form.input_field :location, collection: email_address_location_collection, include_blank: false, class: 'location'
+  = link_to icon_tag('trash'), '#', :'data-destroy-association' => true

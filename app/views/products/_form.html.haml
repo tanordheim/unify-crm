@@ -1,0 +1,14 @@
+= simple_form_for product, remote: true do |f|
+  %div.grid
+    %div.grid-6
+      = f.input :key
+    %div.grid-6
+      = f.input :name
+  %div.grid
+    %div.grid-6
+      = f.input :price
+    %div.grid-6
+      = f.input :account_id, collection: accounts
+
+  %div.modal-footer
+    = f.button :submit, product.new_record? ? 'Create product' : 'Update product', class: 'btn btn-primary'

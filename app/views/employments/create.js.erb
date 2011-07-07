@@ -1,0 +1,5 @@
+<% unless employment.errors.any? -%>
+  $.getScript('/people/<%= employment.person.id.to_s %>/employments', function() {
+    $('li[data-employment-id="<%= employment.id.to_s %>"]').effect('highlight', {}, 'fast');
+  });
+<% end %>

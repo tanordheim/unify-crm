@@ -1,0 +1,260 @@
+@import 'app-ui/bootstrap/globals';
+@import 'app-ui/bootstrap/mixins';
+
+.employments,
+.phone-numbers,
+.websites,
+.instant-messengers,
+.email-addresses,
+.twitter-accounts,
+.addresses {
+
+  li {
+    position: relative;
+    margin-left: -20px;
+    padding-left: 20px;
+
+    [data-destroy-association] {
+      position: absolute;
+      top: 4px;
+      left: 0px;
+      opacity: 0.8;
+      display: none;
+    }
+
+    &:hover [data-destroy-association] {
+      display: block;
+    }
+  }
+  
+  .form {
+    display: none;
+  }
+
+  .help-inline {
+    padding-right: 5px;
+  }
+
+}
+
+#form-templates, #modal-form-templates {
+  display: none;
+}
+
+form {
+
+  #event_name {
+    width: 98%;
+  }
+
+  #event_description {
+    width: 98%;
+    height: 54px;
+  }
+
+  #person_first_name, #person_last_name {
+    width: 140px;
+  }
+
+  #organization_name {
+    width: 300px;
+  }
+
+  #organization_background {
+    width: 260px;
+    height: 100px;
+  }
+
+  #deal_name {
+    width: 431px;
+  }
+
+  #deal_description {
+    width: 390px;
+    height: 100px;
+  }
+
+  #deal_price { width: 55px; }
+  #deal_price_type { width: 100px; }
+  #deal_duration { width: 40px; }
+  #deal_probability { width: 100px; }
+  #deal_expecting_close_on { width: 70px; }
+  
+  #project_name {
+    width: 431px;
+  }
+
+  #project_description {
+    width: 390px;
+    height: 100px;
+  }
+
+  #milestone_name {
+    width: 431px;
+  }
+
+  #milestone_description {
+    width: 390px;
+    height: 100px;
+  }
+
+  #milestone_starts_on, #milestone_ends_on {
+    width: 70px;
+  }
+  
+  #ticket_name {
+    width: 431px;
+  }
+
+  #ticket_description {
+    width: 390px;
+    height: 100px;
+  }
+  
+  #ticket_due_on {
+    width: 70px;
+  }
+
+  #ticket_estimated_minutes {
+    width: 30px;
+  }
+
+  #page_name {
+    width: 431px;
+  }
+
+  #page_body {
+    width: 98%;
+    height: 450px;
+  }
+
+  #username, #password {
+    width: 190px;
+  }
+  
+  .add-first, .add-another {
+    font-size: @baseFontSize;
+    font-weight: normal;
+  }
+
+  .employments {
+    .employment-title, .employment-organization {
+      width: 126px !important;
+    }
+  }
+
+  .addresses {
+    .street-name {
+      width: 420px;
+      height: 37px;
+      margin-bottom: 2px;
+    }
+
+    .zip-city-state {
+      .clearfix();
+
+      .zip-code { width: 62px; margin-bottom: 2px; }
+      .city, .state { width: 165px; margin-bottom: 2px; }
+    }
+
+    .location-country {
+      .clearfix();
+
+      .location { width: 160px; }
+      .country { width: 265px; }
+    }
+  }
+
+  .phone-numbers {
+    .number { width: 115px; margin-bottom: 2px; }
+    .location { width: 80px; margin-bottom: 2px; }
+  }
+
+  .websites {
+    .url { width: 115px; margin-bottom: 2px; }
+    .location { width: 80px; margin-bottom: 2px; }
+  }
+
+  .instant-messengers {
+    .handle { width: 70px; margin-bottom: 2px; }
+    .protocol { width: 60px; margin-bottom: 2px; }
+    .location { width: 60px; margin-bottom: 2px; }
+  }
+
+  .email-addresses {
+    .address { width: 115px; margin-bottom: 2px; }
+    .location { width: 80px; margin-bottom: 2px; }
+  }
+
+  .twitter-accounts {
+    .username { width: 115px; margin-bottom: 2px; }
+    .location { width: 80px; margin-bottom: 2px; }
+  }
+
+  .source {
+    .source { width: 205px; margin-bottom: 0; }
+  }
+
+  .color {
+    position: relative;
+
+    input[type="text"] {
+      width: 60px;
+    }
+
+    button {
+      padding: 4px 3px 0 3px;
+      position: relative;
+      top: -3px;
+    }
+  }
+
+  .percentage {
+    .percentage-slider {
+      display: inline-block;
+      width: 150px;
+    }
+    
+    .percentage-value {
+      padding-left: 5px;
+    }
+  }
+}
+
+#comment_body {
+  width: 98%;
+  height: 75px;
+}
+
+// .contacts-table .form {
+//   display: none;
+// 
+//   form {
+//     margin-bottom: 0;
+//   }
+// }
+
+// #address_street_name {
+//   display: block;
+//   height: 35px;
+// }
+// 
+// #address_zip_code {
+//   width: 62px;
+// }
+// 
+// #address_country {
+//   width: 205px;
+// }
+// 
+// .best_in_place[data-object="organization"][data-attribute="background"] textarea {
+//   width: 100%;
+// }
+// .simple_form.employment button {
+//   position: relative;
+//   top: -4px;
+// }
+// 
+// #organization_name, #person_first_name, #person_last_name {
+//   width: 98%;
+// }

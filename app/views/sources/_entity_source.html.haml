@@ -1,0 +1,16 @@
+%span.editable-value
+  %ul.source.unstyled
+    %li.title
+      %h6 Source
+    %li
+      - if entity.source.blank?
+        %span.muted No source set.
+      - else
+        = entity.source.name
+
+%span.editable-form
+  %ul.source.unstyled
+    %li.title
+      %h6 Source
+    %li
+      = form.input_field :source_id, collection: sources, include_blank: true, class: 'source'

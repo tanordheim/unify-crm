@@ -1,0 +1,14 @@
+%div.modal
+  %header.modal-header
+    = link_to '&times;'.html_safe, '#', class: 'close'
+    %h3= @ticket.name
+  %div.modal-body
+    %div.well
+      - if @ticket.description.blank?
+        %em This ticket does not have a description.
+      - else
+        = ticket_description(@ticket)
+
+  %div.modal-footer
+    = link_to 'Go to ticket', project_ticket_path(@ticket.project, @ticket), class: 'button'
+    = link_to 'Close', '#', class: 'button', :'data-close-modal' => true

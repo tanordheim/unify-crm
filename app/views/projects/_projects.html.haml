@@ -1,0 +1,12 @@
+%table.table.projects-table
+  %thead
+    %tr
+      %th.name
+        = link_to 'Name', url_for_filter(order: :name), remote: true
+      %th.organization Organization
+      %th.ticket-progress Progress
+  %tbody
+    = render self.projects
+    %tr.pagination
+      %td{colspan: 3}
+        = paginate self.projects, remote: true

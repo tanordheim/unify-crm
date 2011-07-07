@@ -1,0 +1,66 @@
+= entity_info_form transaction do |form|
+  %header.page-header
+    %h1
+      - if transaction.new_record?
+        New ledger transaction
+      - else
+        == Ledger transaction ##{transaction.identifier}
+
+    %nav.actions
+      - if !transaction.new_record? && !transaction.frozen?
+        = link_to icon_tag('edit', 'Edit', color: :white), '#', class: 'btn btn-info btn-small', :'data-start-editing' => true
+        = link_to icon_tag('remove', 'Cancel'), '#', class: 'btn btn-small', :'data-cancel-editing' => true
+      = form.button :submit, icon_tag('ok', 'Save', color: :white), class: 'btn btn-info btn-small'
+
+  %div.grid
+    %div.grid-6
+      %div.well.description
+        %span.editable-value
+          - if transaction.description.blank?
+            %span.muted No description set.
+          - else
+            = newline_to_br(transaction.description)
+        %span.editable-form
+          = form.input_field :description, as: :text, placeholder: 'Description'
+
+    %div.grid-6
+      %div.info-block.transacted-on
+        %h6 Transacted on
+        %span.editable-value
+          - if transaction.transacted_on.blank?
+            %span.muted Not set.
+          - else
+            = l(transaction.transacted_on, format: :long)
+        %span.editable-form
+          = form.input_field :transacted_on, as: :date, placeholder: 'Transacted on'
+
+  %h6 Transaction lines
+  %span.editable-value
+    %table.table.ledger-transaction-lines-table
+      %thead
+        %tr
+          %th.identifier #
+          %th.account Account
+          %th.description Description
+          %th.debit Debit
+          %th.credit Credit
+      %tbody
+        = render transaction.lines
+  %span.editable-form
+    = render partial: '/ledger_transaction_lines/form', locals: { form: form }
+
+  %h6 Attachments
+  %span.editable-value
+    - if transaction.attachments.empty?
+      %span.muted No attachments for this transaction.
+    - else
+      %table.table.ledger-transaction-attachments-table
+        %thead
+          %tr
+            %th.identifier #
+            %th.filename Filename
+            %th.size Size
+        %tbody
+          = render transaction.attachments
+  %span.editable-form
+    = render partial: '/ledger_transaction_attachments/form', locals: { form: form }

@@ -1,0 +1,7 @@
+$.closeModal();
+<% if payment_form.errors.any? -%>
+  $.modal("Modify payment form", "<%= escape_javascript(render('form')) %>");
+<% else -%>
+  $('table.payment-forms-table').replaceWith("<%= escape_javascript(render('payment_forms')) %>");
+  $('tr[data-payment-form-id="<%= payment_form.id %>"]').effect('highlight', {}, 500);
+<% end -%>

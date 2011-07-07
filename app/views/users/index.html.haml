@@ -1,0 +1,15 @@
+= render '/instances/sidebar'
+
+%header.page-header
+  %h1 Users
+
+%table.table.users-table
+  %thead
+    %tr
+      %th.username Username
+      %th.name Name
+      %th.title Title
+      %th.email E-mail
+      %th.phone-number Phone number
+  %tbody
+    = render users

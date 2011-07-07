@@ -1,0 +1,104 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  email_addresses:
+    location:
+      work: "Work"
+      home: "Home"
+      other: "Other"
+  phone_numbers:
+    location:
+      work: "Work"
+      mobile: "Mobile"
+      fax: "Fax"
+      pager: "Pager"
+      home: "Home"
+      skype: "Skype"
+      other: "Other"
+  websites:
+    location:
+      work: "Work"
+      personal: "Personal"
+      other: "Other"
+  instant_messengers:
+    location:
+      work: "Work"
+      personal: "Personal"
+      other: "Other"
+    protocol:
+      msn: "MSN"
+      skype: "Skype"
+      google: "Google"
+      aim: "AIM"
+      icq: "ICQ"
+      jabber: "Jabber"
+      yahoo: "Yahoo"
+      other: "Other"
+  twitter_accounts:
+    location:
+      personal: "Personal"
+      business: "Business"
+      other: "Other"
+  addresses:
+    location:
+      work: "Work"
+      home: "Home"
+      other: "Other"
+  deals:
+    filter:
+      name:
+        placeholder: "Enter name..."
+    price_types:
+      fixed: "Fixed bid"
+      per_hour: "Per hour"
+      per_month: "Per month"
+      per_year: "Per year"
+    value:
+      fixed: "%{price}"
+      per_hour: "%{price} per hour"
+      per_hour_with_duration: "%{price} per hour for %{duration} hours"
+      per_month: "%{price} per month"
+      per_month_with_duration: "%{price} per month for %{duration} months"
+      per_year: "%{price} per year"
+      per_year_with_duration: "%{price} per year for %{duration} years"
+  tickets:
+    status:
+      open: "Open"
+      in_progress: "In progress"
+      closed: "Closed"
+    priority:
+      trivial: "Trivial"
+      minor: "Minor"
+      major: "Major"
+      critical: "Cricial"
+      blocker: "Blocker"
+  accounts:
+    type:
+      balance: "Balance"
+      income: "Income"
+      expense: "Expense"
+      activa: "Activa"
+      passiva: "Passiva"
+  ledger_transactions:
+    auto_generated:
+      invoice: "Generated invoice #%{invoice_identifier} for organization #%{organization_identifier}"
+      invoice_debit: "Invoice #%{invoice_identifier}"
+      payment: "Payment via %{payment_form} by organization #%{organization_identifier} for invoice #%{invoice_identifier}"
+  invoices:
+    state:
+      draft: "Draft"
+      unpaid: "Unpaid"
+      partially_paid: "Partially paid"
+      paid: "Paid"
+  scm_comments:
+    scm:
+      github: "Github"
+  contacts:
+    filter:
+      type:
+        all: "All Contacts"
+        organizations: "Organizations"
+        people: "People"
+      name:
+        placeholder: "Enter name..."

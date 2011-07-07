@@ -1,0 +1,8 @@
+$('.modal').modal('hideModal');
+$('.modal, .modal-backdrop').remove()
+<% if employment.errors.any? -%>
+  $("<%= escape_javascript(render('form')) %>").modal();
+<% else -%>
+  $('.employments-tab').html("<%= escape_javascript(render('/people/employments')) %>");
+  $("tr[data-employment-id='<%= employment.id %>'] td").effect('highlight', {}, 500);
+<% end -%>

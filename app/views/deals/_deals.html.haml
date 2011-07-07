@@ -1,0 +1,18 @@
+%table.table.deals-table
+  %thead
+    %tr
+      %th.name
+        = link_to 'Name', url_for_filter(order: :name), remote: true
+      %th.organization Organization
+      %th.responsible Responsible
+      %th.amount Amount
+      %th.stage Stage
+      %th.probability
+        = link_to 'Probability', url_for_filter(order: :probability), remote: true
+      %th.expecting-close-on
+        = link_to 'Expected close', url_for_filter(order: :close_date), remote: true
+  %tbody
+    = render self.deals
+    %tr.pagination
+      %td{colspan: 7}
+        = paginate self.deals, remote: true

@@ -1,0 +1,15 @@
+%table.table.milestones-table
+  %thead
+    %tr
+      %th.name
+        = link_to 'Name', url_for_filter(order: :name), remote: true
+      %th.starts-on
+        = link_to 'Starts on', url_for_filter(order: :starts_on), remote: true
+      %th.ends-on
+        = link_to 'Ends on', url_for_filter(order: :ends_on), remote: true
+      %th.ticket-progress Progress
+  %tbody
+    = render self.milestones
+    %tr.pagination
+      %td{colspan: 4}
+        = paginate self.milestones, remote: true

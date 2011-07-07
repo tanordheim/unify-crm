@@ -1,0 +1,21 @@
+%span.editable-value
+  %ul.phone-numbers.unstyled
+    %li.title
+      %h6 Phone numbers
+    - if phoneable.phone_numbers.empty?
+      %li
+        %span.muted No phone numbers
+    - else
+      = render phoneable.phone_numbers
+
+%span.editable-form
+  %ul.phone-numbers.unstyled
+    %li.title
+      %h6 Phone numbers
+    = form.simple_fields_for :phone_numbers do |phone_number_form|
+      = render partial: '/phone_numbers/field', locals: { form: phone_number_form }
+    %li.add-first{:'data-association' => 'phone_numbers'}= link_to 'Add a phone number', '#'
+    %li.add-another{:'data-association' => 'phone_numbers'}= link_to 'Add another', '#'
+
+= content_for :form_templates do
+  = form_template(form, :phone_numbers)

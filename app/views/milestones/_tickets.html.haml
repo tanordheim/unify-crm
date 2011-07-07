@@ -1,0 +1,27 @@
+#ticket-list
+  = render '/tickets/ticket_actions'
+  = form_tag '', remote: true, id: 'ticket-actions-form', :'data-project-id' => project.id.to_s do
+    %table.table.tickets-table{:'data-milestone-id' => milestone.id}
+      %thead
+        %tr
+          %th.select= check_box_tag :select_all, '', false, :'data-select-all' => 'tickets'
+          %th.id
+            = link_to 'ID', url_for_filter(order: :sequence), remote: true
+          %th.name
+            = link_to 'Name', url_for_filter(order: :name), remote: true
+          %th.category Category
+          %th.component Component
+          %th.priority
+            = link_to 'Priority', url_for_filter(order: :priority), remote: true
+          %th.estimate Estimate
+          %th.status
+            = link_to 'Status', url_for_filter(order: :status), remote: true
+          %th.due-on
+            = link_to 'Due on', url_for_filter(order: :due_on), remote: true
+          %th.assignee Assignee
+          %th.row-actions
+      %tbody
+        = render partial: '/tickets/milestone_ticket', collection: self.tickets
+        %tr.pagination
+          %td{colspan: 11}
+            = paginate self.tickets, remote: true

@@ -1,0 +1,18 @@
+%h6 Employments
+%span.editable-value
+  %ul.employments.unstyled
+    - if contact.employments.empty?
+      %li
+        %span.muted No employments
+    - else
+      = render person.employments
+
+%span.editable-form
+  %ul.employments.unstyled
+    = form.simple_fields_for :employments do |employments_form|
+      = render partial: '/employments/field', locals: { form: employments_form }
+    %li.add-first{:'data-association' => 'employments'}= link_to 'Add an employment', '#'
+    %li.add-another{:'data-association' => 'employments'}= link_to 'Add another', '#'
+
+= content_for :form_templates do
+  = form_template(form, :employments)

@@ -1,0 +1,9 @@
+= simple_form_for payment_form, remote: true do |f|
+  %div.grid
+    %div.grid-6
+      = f.input :name
+    %div.grid-6
+      = f.input :account_id, collection: accounts
+
+  %div.modal-footer
+    = f.button :submit, payment_form.new_record? ? 'Create payment form' : 'Update payment form', class: 'btn btn-primary'

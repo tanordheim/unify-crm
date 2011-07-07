@@ -1,0 +1,52 @@
+= entity_info_form user do |form|
+  %header.page-header
+    %h1
+      %span.editable-value
+        = user.name
+      %span.editable-form
+        = form.input_field :first_name, placeholder: 'First name'
+        = form.input_field :last_name, placeholder: 'Last name'
+
+    %nav.actions
+      - unless user.new_record?
+        = link_to icon_tag('edit', 'Edit', color: :white), '#', class: 'btn btn-info btn-small', :'data-start-editing' => true
+        = link_to icon_tag('remove', 'Cancel'), '#', class: 'btn btn-small', :'data-cancel-editing' => true
+      = form.button :submit, icon_tag('ok', 'Save', color: :white), class: 'btn btn-info btn-small'
+
+  %div.grid
+    %div.grid-6
+      %div.grid
+        %div.grid-6
+          %div.info-block.username
+            %h6 Username
+            %span.editable-value
+              = user.username
+            %span.editable-form
+              = form.input_field :username, placeholder: 'Username'
+          %span.editable-form
+            %div.info-block.password
+              %h6 Password
+              = form.input_field :password, placeholder: 'Password'
+
+        %div.grid-6
+          %div.info-block.title
+            %h6 Title
+            %span.editable-value
+              = user.title
+            %span.editable-form
+              = form.input_field :title, placeholder: 'Title'
+          %span.editable-form
+            %div.info-block.password-confirmation
+              %h6 Password confirmation
+              = form.input_field :password_confirmation, placeholder: 'Confirm password'
+
+    %div.grid-6
+      %div.grid
+        %div.grid-6
+          = render partial: '/phone_numbers/phone_numbers', locals: { phoneable: user, form: form }
+          = render partial: '/websites/websites', locals: { websiteable: user, form: form }
+          = render partial: '/instant_messengers/instant_messengers', locals: { instant_messageable: user, form: form }
+
+        %div.grid-6
+          = render partial: '/email_addresses/email_addresses', locals: { emailable: user, form: form }
+          = render partial: '/twitter_accounts/twitter_accounts', locals: { tweetable: user, form: form }

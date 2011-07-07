@@ -1,0 +1,3 @@
+$('li[data-twitter-account-id="<%= twitter_account.id.to_s %>"]').slideUp('fast', function() {
+  $.getScript('/<%= tweetable_type.to_s.pluralize %>/<%= tweetable_id %>/twitter_accounts');
+});

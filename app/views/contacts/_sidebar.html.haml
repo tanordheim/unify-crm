@@ -1,0 +1,13 @@
+- content_for :sidebar do
+  %div.well.content-navigation
+
+    %ul.nav.nav-list
+      %li.nav-header Contacts
+      %li{class: controller_name == 'contacts' && action_name == 'index' ? 'active' : nil}= link_to 'Contact list', contacts_path
+      %li{class: controller_name == 'organizations' && contact.new_record? && %w(new create).include?(action_name) ? 'active' : nil}= link_to 'Add a new organization', new_organization_path
+      %li{class: controller_name == 'people' && contact.new_record? && %w(new create).include?(action_name) ? 'active' : nil}= link_to 'Add a new person', new_person_path
+
+    - if respond_to?(:contact) && !contact.new_record?
+      %ul.nav.nav-list
+        %li.nav-header= contact.name
+        %li{class: %w(organizations people).include?(controller_name) && !contact.new_record? && %w(create show).include?(action_name) ? 'active' : nil}= link_to "#{contact.class.name.titleize} details", contact

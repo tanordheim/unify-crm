@@ -1,0 +1,5 @@
+%li
+  = form.input_field :title, class: 'employment-title', placeholder: 'Title'
+  %span.help-inline at
+  = form.input_field :organization_id, as: :organization, class: 'employment-organization', placeholder: 'Organization'
+  = link_to icon_tag('trash'), '#', :'data-destroy-association' => true

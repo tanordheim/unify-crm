@@ -1,0 +1,10 @@
+$.closeModal();
+<% if stage.errors.any? -%>
+  $.modal("Add new deal stage", "<%= escape_javascript(render('form')) %>", function() {
+    $.configureColorPickers();
+    $.configurePercentageSliders();
+  });
+<% else -%>
+  $('table.deal-stages-table').replaceWith("<%= escape_javascript(render('deal_stages')) %>");
+  $('tr[data-deal-stage-id="<%= stage.id %>"]').effect('highlight', {}, 500);
+<% end -%>

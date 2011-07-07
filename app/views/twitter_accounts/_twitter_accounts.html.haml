@@ -1,0 +1,22 @@
+%span.editable-value
+  %ul.twitter-accounts.unstyled
+    %li.title
+      %h6 Twitter accounts
+    - if tweetable.twitter_accounts.empty?
+      %li
+        %span.muted No twitter accounts
+    - else
+      = render tweetable.twitter_accounts
+
+%span.editable-form
+  %ul.twitter-accounts.unstyled
+    %li.title
+      %h6 Twitter accounts
+
+    = form.simple_fields_for :twitter_accounts do |twitter_form|
+      = render partial: '/twitter_accounts/field', locals: { form: twitter_form }
+    %li.add-first{:'data-association' => 'twitter_accounts'}= link_to 'Add a Twitter account', '#'
+    %li.add-another{:'data-association' => 'twitter_accounts'}= link_to 'Add another', '#'
+
+= content_for :form_templates do
+  = form_template(form, :twitter_accounts)

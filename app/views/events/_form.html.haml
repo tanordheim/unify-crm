@@ -1,0 +1,36 @@
+= simple_form_for event, remote: true do |f|
+  = f.input :name, placeholder: 'Event name'
+  %div.grid
+    %div.grid-6
+      = f.input :description, as: :text, placeholder: 'Event description'
+    %div.grid-6
+      = f.input :category_id, collection: categories, include_blank: 'No category'
+
+  %div.grid
+    %div.grid-6
+      = f.input :starts_at, as: :date_time, placeholder: 'Time'
+    %div.grid-6
+      = f.input :ends_at, as: :date_time, placeholder: 'Time'
+
+  %div.grid
+    %div.grid-6
+      %h6 Assignees
+      %ul.event-assignees.unstyled
+        = f.simple_fields_for :assignees do |assignees_form|
+          = render partial: '/event_assignees/field', locals: { form: assignees_form }
+        %li.add-first{:'data-association' => 'assignees'}= link_to 'Add an assignee', '#'
+        %li.add-another{:'data-association' => 'assignees'}= link_to 'Add another', '#'
+    %div.grid-6
+      %h6 External attendees
+      %ul.event-people.unstyled
+        = f.simple_fields_for :external_attendees do |attendees_form|
+          = render partial: '/events/person_field', locals: { form: attendees_form }
+        %li.add-first{:'data-association' => 'external_attendees'}= link_to 'Add a person', '#'
+        %li.add-another{:'data-association' => 'external_attendees'}= link_to 'Add another', '#'
+
+  %div.modal-footer
+    = f.button :submit, 'Save', class: 'btn btn-primary'
+
+  #modal-form-templates
+    = form_template(f, :assignees, partial: '/event_assignees/field')
+    = form_template(f, :external_attendees, partial: '/events/person_field')

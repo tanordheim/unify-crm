@@ -1,0 +1,7 @@
+$.closeModal();
+<% if tax_code.errors.any? -%>
+  $.modal("Modify tax code", "<%= escape_javascript(render('form')) %>");
+<% else -%>
+  $('table.tax-codes-table').replaceWith("<%= escape_javascript(render('tax_codes')) %>");
+  $('tr[data-tax-code-id="<%= tax_code.id %>"]').effect('highlight', {}, 500);
+<% end -%>

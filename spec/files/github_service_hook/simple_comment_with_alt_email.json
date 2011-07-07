@@ -1,0 +1,60 @@
+{
+    "before": "39ff3c2be1aaf51b323aa670812dc43d1fe23989",
+    "compare": "https://github.com/tanordheim/unify/compare/39ff3cc...ab355ed",
+    "forced": false,
+    "base_ref": null,
+    "after": "39ff3c2be1aaf51b323aa670812dc43d1fe23988",
+    "pusher": {
+        "email": "other-test@example.com",
+        "name": "tanordheim"
+    },
+    "commits": [
+        {
+            "distinct": true,
+            "timestamp": "2011-09-12T12:37:22-07:00",
+            "message": "#TICKET# This is a simple commit comment",
+            "url": "https://github.com/tanordheim/unify/commit/39ff3c2be1aaf51b323aa670812dc43d1fe23991",
+            "added": [
+                "test_added.rb"
+            ],
+            "modified": [
+                "test_modified.rb"
+            ],
+            "removed": [
+                "test_removed.rb"
+            ],
+            "author": {
+                "username": "tanordheim",
+                "email": "other-test@example.com",
+                "name": "Trond Arve Nordheim"
+            },
+            "id": "39ff3c2be1aaf51b323aa670812dc43d1fe23992"
+        }
+    ],
+    "repository": {
+        "pushed_at": "2011/09/13 04:16:15 -0700",
+        "open_issues": 0,
+        "owner": {
+            "email": "other-test@example.com",
+            "name": "tanordheim"
+        },
+        "has_wiki": true,
+        "forks": 0,
+        "created_at": "2011/08/28 17:20:04 -0700",
+        "watchers": 1,
+        "has_issues": true,
+        "language": "Ruby",
+        "has_downloads": true,
+        "url": "https://github.com/tanordheim/unify",
+        "size": 600,
+        "fork": false,
+        "organization": "tanordheim",
+        "homepage": "",
+        "description": "Unify",
+        "name": "unify",
+        "private": true
+    },
+    "deleted": false,
+    "created": false,
+    "ref": "refs/heads/master"
+}

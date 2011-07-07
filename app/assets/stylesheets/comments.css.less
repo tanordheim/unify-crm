@@ -1,0 +1,112 @@
+@import 'app-ui/bootstrap/mixins';
+
+.comments-table {
+  tr.comment, tr.scm-comment {
+    .picture {
+      width: 40px !important;
+      padding-right: 10px;
+    }
+
+    .username {
+      #table-column > .min-width();
+      padding-top: 15px;
+      padding-right: 10px;
+    }
+
+    .comment {
+      padding-top: 15px;
+    }
+
+    .date {
+      #table-column > .min-width();
+      #table-column > .pull-right();
+      font-size: 11px;
+      padding-top: 6px;
+    }
+  }
+
+  tr.scm-comment .comment .scm-comment-files {
+    ul {
+      li {
+        font-size: 10px;
+      }
+    }
+  }
+}
+
+.scm-comment-files {
+  margin-top: 9px;
+  display: none;
+}
+
+// form.comment {
+// 
+//   .input {
+//     margin-bottom: 0;
+// 
+//     label {
+//       display: none;
+//     }
+// 
+//     textarea {
+//       width: 99%;
+//       height: 50px;
+//     }
+//   }
+// 
+//   .actions {
+//     margin-top: -2px;
+//     text-align: right;
+//   }
+// }
+// 
+// div.comment {
+//   .clearfix();
+//   padding-bottom: 5px;
+//   margin-bottom: 15px;
+//   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+// 
+//   .icon-gutter {
+//     width: 50px;
+//     height: 30px;
+//     float: left;
+//     background-position: 0 3px;
+//     background-repeat: no-repeat;
+//     background-image: asset-url('comment_types/comment.png');
+//   }
+// 
+//   .body {
+//     margin-left: 50px;
+// 
+//     h4 {
+//       line-height: 20px;
+//     }
+// 
+//     p.details {
+//       color: #bfbfbf;
+//       font-size: 11px;
+// 
+//       a {
+//         color: #bfbfbf;
+//       }
+//     }
+//   }
+// 
+//   &.scm-comment {
+//     .icon-gutter {
+//       background-image: asset-url('comment_types/scm_comment.png');
+//     }
+// 
+//     ul {
+//       li {
+//         font-size: 10px;
+//       }
+//     }
+// 
+//     &.github-scm-comment {
+//       .icon-gutter {
+//         background-image: asset-url('comment_types/github_scm_comment.png');
+//       }
+//     }
+//   }
+// }

@@ -1,0 +1,3 @@
+var currentFilter = "<%= escape_javascript({ filter: current_filters }.to_query) %>";
+var eventsUrl = "/calendar.json?" + currentFilter;
+$.setCalendarEventSource(eventsUrl);

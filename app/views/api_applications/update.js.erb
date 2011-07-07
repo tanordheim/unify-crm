@@ -1,0 +1,8 @@
+$.closeModal();
+
+<% if application.errors.any? -%>
+  $.modal("Modify API application", "<%= escape_javascript(render('form')) %>");
+<% else -%>
+  $('table.api-applications-table').replaceWith("<%= escape_javascript(render('api_applications')) %>");
+  $('tr[data-api-application-id="<%= application.id %>"]').effect('highlight', {}, 500);
+<% end -%>

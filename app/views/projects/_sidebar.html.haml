@@ -1,0 +1,61 @@
+- content_for :sidebar do
+  %div.well.content-navigation
+
+    %ul.nav.nav-list
+      %li.nav-header Projects
+      %li{class: controller_name == 'projects' && action_name == 'index' ? 'active' : nil}= link_to 'Project list', projects_path
+      %li{class: controller_name == 'projects' && project.new_record? && %w(new create).include?(action_name) ? 'active' : nil}= link_to 'Add a new project', new_project_path
+
+    - if respond_to?(:project) && !project.new_record?
+      %ul.nav.nav-list
+        %li.nav-header= project.name
+        %li{class: controller_name == 'projects' && !project.new_record? && %w(create show).include?(action_name) ? 'active' : nil}= link_to "Project details", project
+        - unless controller_name == 'components'
+          %li= link_to 'Components', project_components_path(project)
+        - unless controller_name == 'milestones'
+          %li= link_to 'Milestones', project_milestones_path(project)
+        - unless controller_name == 'tickets'
+          %li= link_to 'Tickets', project_tickets_path(project)
+        %li= link_to 'Pages', project_pages_path(project)
+
+    - if controller_name == 'components'
+      %ul.nav.nav-list
+        %li.nav-header Components
+        %li.active= link_to 'Component list', project_components_path(project)
+        %li= link_to 'Add a new component', new_project_component_path(project), remote: true
+
+    - if controller_name == 'milestones'
+      %ul.nav.nav-list
+        %li.nav-header Milestones
+        %li{class: action_name == 'index' ? 'active' : nil}= link_to 'Milestone list', project_milestones_path(project)
+        %li{class: milestone.new_record? && %w(new create).include?(action_name) ? 'active' : nil}= link_to 'Add a new milestone', new_project_milestone_path(project)
+
+      - if !milestone.new_record? && %w(create show change_log).include?(action_name)
+        %ul.nav.nav-list
+          %li.nav-header= milestone.name
+          %li{class: %w(create show).include?(action_name) ? 'active' : nil}= link_to 'Milestone details', project_milestone_path(project, milestone)
+          %li{class: action_name == 'change_log' ? 'active' : nil}= link_to 'Change log', change_log_project_milestone_path(project, milestone)
+          %li= link_to 'Add a new ticket', new_project_ticket_path(project, ticket: { milestone_id: milestone.id.to_s })
+
+    - if controller_name == 'tickets'
+      %ul.nav.nav-list
+        %Li.nav-header Tickets
+        %li{class: action_name == 'index' ? 'active' : nil}= link_to 'Ticket list', project_tickets_path(project)
+        %li{class: ticket.new_record? && %w(new create).include?(action_name) ? 'active' : nil}= link_to 'Add a new ticket', new_project_ticket_path(project)
+
+      - if !ticket.new_record? && %w(create show).include?(action_name)
+        %ul.nav.nav-list
+          %li.nav-header= ticket.identifier
+          %li.active= link_to 'Ticket details', project_ticket_path(project, ticket)
+
+    - if controller_name == 'pages'
+      %ul.nav.nav-list
+        %li.nav-header Pages
+        %li{class: action_name == 'index' ? 'active' : nil}= link_to 'Page list', project_pages_path(project)
+        %li{class: %w(new create).include?(action_name) ? 'active' : nil}= link_to 'Add a new page', new_project_page_path(project)
+
+      - if %w(show edit update).include?(action_name)
+        %ul.nav.nav-list
+          %li.nav-header= page.name
+          %li{class: action_name == 'show' ? 'active' : nil}= link_to 'Page details', project_page_path(project, page)
+          %li{class: %w(edit update).include?(action_name) ? 'active' : nil}= link_to 'Edit page', edit_project_page_path(project, page)

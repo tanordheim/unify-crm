@@ -1,0 +1,57 @@
+<%
+max_tasks_per_day = 3
+first_day = start_of_period.beginning_of_week
+last_day = end_of_period.end_of_week
+-%>
+<table>
+  <thead>
+    <tr>
+      <th class="week">W</th>
+      <th>Mon</th>
+      <th>Tue</th>
+      <th>Wed</th>
+      <th>Thu</th>
+      <th>Fri</th>
+      <th>Sat</th>
+      <th>Sun</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% last_month = first_day.month -%>
+    <% today = Date.today -%>
+    <% (first_day..last_day).each_with_index do |date, index| -%>
+      <% if index % 7 == 0 -%>
+        <tr>
+          <td class="week"><%= date.cweek %></td>
+      <% end -%>
+      <%
+      css_classes = []
+      css_classes << 'today' if date == today
+      css_classes << 'previous-month' if date < start_of_period
+      css_classes << 'next-month' if date > end_of_period
+      css_classes << 'current' if current_date == date
+      -%>
+      <td class="<%= css_classes.join(' ') %>"<% if date >= start_of_period && date <= end_of_period -%> data-year="<%= date.year %>" data-month="<%= date.month %>" data-day="<%= date.day %>"<% end -%>>
+        <% tasks_for_date = tasks.select { |t| t.due_at.to_date == date } -%>
+        <% unless tasks_for_date.empty? -%>
+          <ul>
+            <% tasks_for_date[0..(max_tasks_per_day - 1)].each do |task| -%>
+              <%= render partial: '/tasks/calendar_task', locals: { task: task } -%>
+            <% end -%>
+            <% if tasks_for_date.length > max_tasks_per_day -%>
+              <li class="more">...and <%= tasks_for_date.length - max_tasks_per_day %> more.</li>
+            <% end -%>
+          </ul>
+        <% end -%>
+        <div class="date-strip">
+          <% if last_month != date.month -%>
+            <span class="month"><%= date.strftime('%b %Y') -%></span>
+          <% end -%>
+          <span class="date"><%= date.strftime('%d') -%></span>
+        </div>
+      </td>
+      <% if index % 7 == 6 -%></tr><% end -%>
+      <% last_month = date.month -%>
+    <% end -%>
+  </tbody>
+</table>

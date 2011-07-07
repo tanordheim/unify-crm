@@ -1,0 +1,27 @@
+%header.page-header.entity-header.ticket-header
+  %div.grid
+    %div.grid-6.name
+      %h1= ticket.name
+      %p
+        = category_label(ticket.category, label: ticket.identifier)
+        = ticket.description
+
+    %div.grid-5.information
+      %ul
+        %li.project= link_to ticket.project.name, ticket.project
+        - unless ticket.milestone.blank?
+          %li.milestone= link_to ticket.milestone.name, ticket.milestone
+        - unless ticket.due_on.blank?
+          %li.date= l(ticket.due_on, format: :long)
+        %li.status= ticket_status(ticket)
+
+    %div.grid-5.information
+      %ul
+        %li.user= link_to ticket.user.username, ticket.user
+        %li.time
+          Estimated
+          = ticket_estimate(ticket)
+        - unless ticket.worked_minutes == 0
+          %li.time
+            Worked
+            = ticket_worked_time(ticket)

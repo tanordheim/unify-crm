@@ -1,0 +1,9 @@
+%tr
+  %td.name
+    - if project.closed?
+      %span.label.label-important Closed
+    = category_label(project.category)
+    = link_to project.name, project
+  %td.organization= link_to project.organization.name, project.organization
+  %td.ticket-progress
+    = ticket_progress_bar(project.ticket_progress)

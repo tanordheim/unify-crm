@@ -1,0 +1,22 @@
+%span.editable-value
+  %ul.instant-messengers.unstyled
+    %li.title
+      %h6 Instant messengers
+    - if instant_messageable.instant_messengers.empty?
+      %li
+        %span.muted No instant messengers
+    - else
+      = render instant_messageable.instant_messengers
+
+%span.editable-form
+  %ul.instant-messengers.unstyled
+    %li.title
+      %h6 Instant messengers
+    = form.simple_fields_for :instant_messengers do |im_form|
+      = render partial: '/instant_messengers/field', locals: { form: im_form }
+
+    %li.add-first{:'data-association' => 'instant_messengers'}= link_to 'Add an IM', '#'
+    %li.add-another{:'data-association' => 'instant_messengers'}= link_to 'Add another', '#'
+
+= content_for :form_templates do
+  = form_template(form, :instant_messengers)

@@ -1,0 +1,9 @@
+%tr
+  %td.identifier
+    - identifier = invoice.draft? ? 'Draft' : invoice.identifier
+    = link_to identifier, invoice
+  %td.organization= link_to invoice.organization.name, invoice.organization
+  %td.amount= format_currency(invoice.total_cost)
+  %td.billed-on= l(invoice.billed_on, format: :long)
+  %td.due-on= l(invoice.due_on, format: :long)
+  %td.state= invoice_state(invoice)

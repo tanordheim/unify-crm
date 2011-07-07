@@ -1,0 +1,11 @@
+%tr.person{class: person.deleted? ? 'deleted' : nil}
+  %td.picture
+    = link_to image_tag(person.image.list.url, alt: person.name), person, class: 'thumbnail'
+  %td.information
+    %h4
+      - if person.deleted?
+        %span.label.label-important Deleted
+      = link_to person.name, person
+      - unless person.employments.empty?
+        %small= employment_summaries(person.employments).to_sentence.html_safe
+    = render partial: '/contacts/list_contact_details', locals: { contact: person }

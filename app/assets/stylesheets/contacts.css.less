@@ -1,0 +1,68 @@
+@import 'app-ui/bootstrap/globals';
+@import 'app-ui/bootstrap/mixins';
+
+.contacts-table {
+  .picture {
+    width: 58px;
+    height: 54px;
+
+    a {
+      width: 54px;
+      height: 50px;
+    }
+  }
+  .information {
+    padding-top: 10px;
+
+    h4 {
+      > a {
+        color: @grayDark;
+      }
+    }
+
+    dl {
+      margin-top: 5px;
+      margin-bottom: 0;
+
+      dt, dd {
+        display: inline-block;
+      }
+
+      dd {
+        margin-left: 2px;
+        margin-right: 10px;
+
+        small {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+
+  &.table-condensed {
+    .picture {
+      width: 40px;
+    }
+
+    .information {
+      padding-top: 0;
+      vertical-align: middle;
+
+      h5 {
+        display: inline-block;
+      }
+      
+      dl {
+        display: inline-block;
+        padding-left: 10px;
+        font-size: 12px;
+      }
+    }
+
+    .remove { vertical-align: middle; }
+  }
+}
+
+.entity-header .contact-details {
+  text-align: right;
+}

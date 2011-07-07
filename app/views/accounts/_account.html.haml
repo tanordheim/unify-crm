@@ -1,0 +1,12 @@
+%tr{:'data-account-id' => account.id}
+  %td.number= account.number
+  %td.name= account.name
+  %td.tax-code
+    - if account.tax_code.blank?
+      No tax code
+    - else
+      == #{account.tax_code.code} - #{account.tax_code.name}
+  %td.type= t("accounts.type.#{account.type_name}")
+  %td.balance= format_currency(account.balance)
+  %td.row-actions
+    = link_to 'Edit', [:edit, account], remote: true, class: 'edit-action'

@@ -1,0 +1,14 @@
+= render '/projects/sidebar'
+
+%header.page-header
+  %h1
+    Pages
+    %small= project.name
+
+%table.table.pages-table
+  %thead
+    %tr
+      %th.name Name
+      %th.last-updated Last updated
+  %tbody
+    = render pages

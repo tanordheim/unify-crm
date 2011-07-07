@@ -1,0 +1,18 @@
+if ($('table.tickets-table[data-milestone-id]').length > 0) {
+
+  // Milestone ticket list.
+  $('tr[data-ticket-id="<%= ticket.id %>"]').replaceWith("<%= escape_javascript(render(partial: 'milestone_ticket', locals: { milestone_ticket: ticket })) %>");
+
+} else if ($('body.dashboard-view table.tickets-table').length > 0) {
+
+  // Milestone ticket list.
+  $('tr[data-ticket-id="<%= ticket.id %>"]').replaceWith("<%= escape_javascript(render(partial: 'dashboard_ticket', locals: { dashboard_ticket: ticket })) %>");
+  
+} else if ($('table.tickets-table').length > 0) {
+
+  // Full ticket list.
+  $('tr[data-ticket-id="<%= ticket.id %>"]').replaceWith("<%= escape_javascript(render(partial: 'ticket', locals: { ticket: ticket })) %>");
+  
+}
+
+$('tr[data-ticket-id="<%= ticket.id %>"]').effect('highlight', {}, 500);

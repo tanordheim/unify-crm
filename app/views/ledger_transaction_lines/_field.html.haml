@@ -1,0 +1,7 @@
+%tr.field
+  %td.account= form.input_field :account_id, collection: accounts
+  %td.description= form.input_field :description
+  %td.debit= form.input_field :debit
+  %td.credit= form.input_field :credit
+  %td.row-actions
+    = link_to icon_tag('trash'), '#', :'data-destroy-association' => true

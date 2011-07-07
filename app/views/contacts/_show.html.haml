@@ -1,0 +1,13 @@
+%div{id: "#{contact.class.name.underscore}-view"}
+  = render 'sidebar'
+
+  = render 'entity_info'
+
+  - if contact.is_a?(Organization)
+    %h2 Employees
+    = render '/employees/employees'
+
+  %h2
+    Comments
+    %small= link_to 'Add a comment', new_comment_path_for(contact), remote: true, class: 'btn btn-mini'
+  = render '/comments/comments'

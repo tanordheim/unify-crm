@@ -1,0 +1,5 @@
+%tr{:'data-source-id' => source.id}
+  %td.name= source.name
+  %td.row-actions
+    = link_to 'Edit', [:edit, source], remote: true, class: 'edit-action'
+    = link_to 'Delete', source, remote: true, method: :delete, class: 'delete-action', confirm: 'Are you sure you want to remove this source?'

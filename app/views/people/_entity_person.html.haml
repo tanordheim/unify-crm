@@ -1,0 +1,9 @@
+%h6 Person
+%span.editable-value
+  - if entity.person.blank?
+    %span.muted No person assigned
+  - else
+    %table.contacts-table
+      = render partial: '/people/person', locals: { person: entity.person }
+%span.editable-form
+  = form.input_field :person_id, as: :person

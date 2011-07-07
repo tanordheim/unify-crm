@@ -1,0 +1,21 @@
+!!! 5
+%html{:lang => 'en'}
+  %head
+    %meta{:charset => 'utf-8'}
+    %meta{:'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+    %meta{:name => 'description', :content => 'Unify Business Management Suite'}
+    %title= [current_instance.organization.name, 'Unify'].join(' - ')
+
+    /[if lt IE 9]
+      = javascript_include_tag 'http://html5shim.googlecode.com/svn/trunk/html5.js'
+
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tag
+
+  %body#authentication
+
+    %section.content-container.login-screen
+      %article.content
+        %article
+          = yield

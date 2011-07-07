@@ -1,0 +1,15 @@
+%header.page-header.entity-header.milestone-header
+  %div.grid
+    %div.grid-8.name
+      %h1= milestone.name
+      %p
+        = milestone.description
+
+    %div.grid-8.information
+      %ul
+        %li.project= link_to milestone.project.name, milestone.project
+        %li.date
+          From
+          = l(milestone.starts_on, format: :long)
+          to
+          = l(milestone.ends_on, format: :long)

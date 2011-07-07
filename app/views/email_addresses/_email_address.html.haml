@@ -1,0 +1,3 @@
+%li{:'data-email-address-id' => email_address.id.to_s}
+  = link_to_email email_address.address
+  %small.muted= email_address_location_name(email_address.location_name)

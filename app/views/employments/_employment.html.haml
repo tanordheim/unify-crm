@@ -1,0 +1,5 @@
+%li
+  - unless employment.title.blank?
+    = employment.title
+    at
+  = link_to employment.organization.name, employment.organization

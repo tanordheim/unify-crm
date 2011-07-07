@@ -1,0 +1,11 @@
+= simple_form_for deal do |f|
+  %div.grid
+    %div.grid-6
+      = f.input :name
+
+    %div.grid-6
+      = f.input :organization_id, as: :organization, required: true, input_html: { class: 'input-xlarge' }
+
+  %div.modal-footer
+    = f.button :submit, 'Create', class: 'btn btn-primary'
+    = link_to 'Cancel', '#', class: 'btn', :'data-dismiss' => 'modal'

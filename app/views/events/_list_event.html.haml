@@ -1,0 +1,7 @@
+%li{:'data-event-id' => list_event.id.to_s}
+  %small.muted
+    - format = list_event.starts_at.to_date == Date.today ? '%H:%M' : '%a %d, %H:%M'
+    = list_event.starts_at.strftime(format)
+  - unless list_event.category.blank?
+    = category_label(list_event.category)
+  = link_to list_event.name, event_path(list_event), remote: true

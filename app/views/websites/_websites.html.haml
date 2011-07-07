@@ -1,0 +1,21 @@
+%span.editable-value
+  %ul.websites.unstyled
+    %li.title
+      %h6 Websites
+    - if websiteable.websites.empty?
+      %li
+        %span.muted No websites
+    - else
+      = render websiteable.websites
+
+%span.editable-form
+  %ul.websites.unstyled
+    %li.title
+      %h6 Websites
+    = form.simple_fields_for :websites do |website_form|
+      = render partial: '/websites/field', locals: { form: website_form }
+    %li.add-first{:'data-association' => 'websites'}= link_to 'Add a website', '#'
+    %li.add-another{:'data-association' => 'websites'}= link_to 'Add another', '#'
+
+= content_for :form_templates do
+  = form_template(form, :websites)

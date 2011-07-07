@@ -1,0 +1,13 @@
+version: "3.3"
+services:
+  mongodb:
+    image: mongo:3.6
+  redis:
+    image: redis:3
+  app:
+    build: .
+    command: bash -c "rake db:seed && rails server"
+    ports:
+      - "3000:3000"
+    depends_on: [mongodb, redis]
+    

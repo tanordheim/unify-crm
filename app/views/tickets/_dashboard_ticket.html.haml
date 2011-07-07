@@ -1,0 +1,18 @@
+%tr{:class => ticket_css_class(dashboard_ticket), :'data-ticket-id' => dashboard_ticket.id}
+  %td.id= link_to dashboard_ticket.identifier, project_ticket_path(dashboard_ticket.project, dashboard_ticket)
+  %td.name
+    = category_label(dashboard_ticket.category)
+    = dashboard_ticket.name
+  %td.priority
+    - if dashboard_ticket.priority.blank?
+      %span.muted Not set
+    - else
+      = ticket_priority(dashboard_ticket)
+  %td.status= ticket_status(dashboard_ticket)
+  %td.due-on
+    - if dashboard_ticket.due_on.blank?
+      %span.muted Not set
+    - else
+      = l(dashboard_ticket.due_on, format: :short)
+  %td.row-actions
+    = render partial: '/tickets/ticket_state_actions', locals: { ticket: dashboard_ticket }

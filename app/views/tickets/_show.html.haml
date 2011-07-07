@@ -1,0 +1,8 @@
+%div#ticket-view
+  = render '/projects/sidebar'
+  = render 'entity_info'
+
+  %h2
+    Comments
+    %small= link_to 'Add a comment', new_comment_path_for(ticket), remote: true, class: 'btn btn-mini'
+  = render '/comments/comments'

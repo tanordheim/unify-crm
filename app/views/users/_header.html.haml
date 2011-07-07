@@ -1,0 +1,18 @@
+%header.page-header.entity-header.user-header
+  %div.grid
+    %div.grid-7.name
+      = image_tag user.image.url, alt: user.name
+      %h1= user.name
+      %ul
+        %li= user.title
+
+    %div.grid-5.information
+      %ul
+        - unless user.phone_numbers.primary.blank?
+          %li.phone
+            = user.phone_numbers.primary.number
+            %small= t("phone_numbers.location.#{user.phone_numbers.primary.location_name}")
+        - unless user.email_addresses.primary.blank?
+          %li.email
+            = link_to user.email_addresses.primary.address, "mailto:#{user.email_addresses.primary.address}"
+            %small= t("email_addresses.location.#{user.email_addresses.primary.location_name}")

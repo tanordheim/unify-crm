@@ -1,0 +1,3 @@
+%li{:'data-website-id' => website.id.to_s}
+  = link_to website.url, website.url
+  %small.muted= website_location_name(website.location_name)

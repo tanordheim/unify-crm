@@ -1,0 +1,24 @@
+= render '/projects/sidebar'
+
+%header.page-header
+  %h1
+    Tickets
+    %small= project.name
+  %ul.filter
+    %li.text Showing
+    %li.dropdown
+      = filter_for :status
+    %li.text tickets in
+    %li.dropdown
+      = filter_for :category
+    %li.text for
+    %li.dropdown
+      = filter_for :component
+    %li.text assigned to
+    %li.dropdown
+      = filter_for :assignee
+    %li.text matching
+    %Li.search
+      = filter_for :keywords
+
+= render 'tickets'

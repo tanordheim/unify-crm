@@ -1,0 +1,11 @@
+%table.table.ledger-transactions-table
+  %thead
+    %tr
+      %th.identifier #
+      %th.transacted-on Date
+      %th.description Description
+      %th.net-amount Net amount
+      %th.row-actions
+  %tbody
+    = render transactions
+= paginate transactions

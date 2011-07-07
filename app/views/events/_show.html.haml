@@ -1,0 +1,30 @@
+%h4
+  - if event.all_day?
+    = l(event.starts_at.to_date, format: :short)
+  - else
+    = l(event.starts_at, format: :short)
+  to
+  - if event.all_day?
+    = l(event.ends_at.to_date, format: :short)
+  - else
+    = l(event.ends_at, format: :short)
+  
+- unless event.description.blank?
+  %div.well= format_description_text(event.description)
+
+%div.grid
+  %div.grid-6
+    %h6 Assignees
+    %ul.assignees.unstyled
+      - event.assignees.each do |assignee|
+        %li= link_to assignee.user.username, assignee.user
+  %div.grid-6
+    - unless event.external_attendees.empty?
+      %h6 External attendees
+      %ul.attendees.unstyled
+        - event.external_attendees.each do |attendee|
+          %li= link_to attendee.person.name, attendee.person
+
+%div.modal-footer
+  = link_to 'Edit', edit_event_path, remote: true, class: 'btn'
+  = link_to 'Close', '#', class: 'btn', :'data-dismiss' => 'modal'

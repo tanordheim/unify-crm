@@ -1,0 +1,13 @@
+%h5 Upcoming events
+- if sidebar_todays_events.empty? && sidebar_this_weeks_events.empty? && sidebar_next_weeks_events.empty?
+  %span.muted There are no events for you within the next two weeks.
+- else
+  - unless sidebar_todays_events.empty?
+    %h6 Today
+    = render partial: '/events/events', locals: { events: sidebar_todays_events }
+  - unless sidebar_this_weeks_events.empty?
+    %h6 This week
+    = render partial: '/events/events', locals: { events: sidebar_this_weeks_events }
+  - unless sidebar_next_weeks_events.empty?
+    %h6 Next week
+    = render partial: '/events/events', locals: { events: sidebar_next_weeks_events }

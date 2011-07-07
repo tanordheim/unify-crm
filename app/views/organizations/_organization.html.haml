@@ -1,0 +1,9 @@
+%tr.organization{class: organization.deleted? ? 'deleted' : nil}
+  %td.picture
+    = link_to image_tag(organization.image.list.url, alt: organization.name), organization, class: 'thumbnail'
+  %td.information
+    %h4
+      - if organization.deleted?
+        %span.label.label-important Deleted
+      = link_to organization.name, organization
+    = render partial: '/contacts/list_contact_details', locals: { contact: organization }

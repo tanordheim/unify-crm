@@ -1,0 +1,19 @@
+%li{:'data-address-id' => address.id}
+  %h6
+    = address_location_name(address.location_name)
+    address
+  %div.grid
+    %div.grid-7
+      %address
+        - unless address.street_name.blank?
+          = newline_to_br(address.street_name)
+          %br
+        - unless address.zip_code.blank? && address.city.blank?
+          = [address.zip_code, address.city].join(' ').strip
+          %br
+        - unless address.state.blank? && address.country.blank?
+          = [address.state, address.country].join(', ').strip
+
+    %div.grid-5.map
+      - if address.has_coordinates?
+        = link_to_map address, width: 150, height: 50

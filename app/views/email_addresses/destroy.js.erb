@@ -1,0 +1,3 @@
+$('li[data-email-address-id="<%= email_address.id.to_s %>"]').slideUp('fast', function() {
+  $.getScript('/<%= emailable_type.to_s.pluralize %>/<%= emailable_id %>/email_addresses');
+});

@@ -1,0 +1,14 @@
+= simple_form_for tax_code, remote: true do |f|
+  %div.grid
+    %div.grid-6
+      = f.input :name
+    %div.grid-6
+      = f.input :code
+  %div.grid
+    %div.grid-6
+      = f.input :percentage
+    %div.grid-6
+      = f.input :target_account_id, collection: accounts
+
+  %div.modal-footer
+    = f.button :submit, tax_code.new_record? ? 'Create tax code' : 'Update tax code', class: 'btn btn-primary'

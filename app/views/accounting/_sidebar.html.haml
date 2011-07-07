@@ -1,0 +1,72 @@
+- content_for :sidebar do
+  %div.well.content-navigation
+
+    %ul.nav.nav-list
+      %li.nav-header Accounting
+      %li{class: controller_name == 'accounting' ? 'active' : nil}= link_to 'Overview', accounting_path
+      %li= link_to 'Invoices', invoices_path
+      %li= link_to 'Ledger', ledger_transactions_path
+      %li= link_to 'Acounts', accounts_path
+      %li= link_to 'Organization accounts', organization_accounts_path
+      %li= link_to 'Products', products_path
+      %li= link_to 'Tax codes', tax_codes_path
+      %li= link_to 'Payment forms', payment_forms_path
+
+    - if controller_name == 'invoices'
+      %ul.nav.nav-list
+        %li.nav-header Invoices
+        %li{class: action_name == 'index' ? 'active' : nil}= link_to 'Invoice list', invoices_path
+        %li{class: invoice.new_record? && %w(new create).include?(action_name) ? 'active' : nil}= link_to 'Add a new invoice', new_invoice_path
+
+      - if !invoice.new_record? && %w(create show).include?(action_name)
+        %ul.nav.nav-list
+          %li.nav-header
+            Invoice
+            - if invoice.draft?
+              draft
+            - else
+              == ##{invoice.identifier}
+          %li{class: controller_name == 'invoices' ? 'active' : nil}= link_to 'Invoice details', invoice_path(invoice)
+          %li= link_to 'Download PDF', generate_pdf_invoice_path(invoice), remote: true
+
+
+    - if controller_name == 'ledger_transactions'
+      %ul.nav.nav-list
+        %li.nav-header Ledger
+        %li{class: action_name == 'index' ? 'active' : nil}= link_to 'Ledger transactions', ledger_transactions_path
+        %li{class: transaction.new_record? && %w(new create).include?(action_name) ? 'active' : nil}= link_to 'Add a new transaction', new_ledger_transaction_path
+
+      - if !transaction.new_record? && %w(create show).include?(action_name)
+        %ul.nav.nav-list
+          %li.nav-header
+            == Transaction ##{transaction.identifier}
+          %li{class: controller_name == 'ledger_transactions' ? 'active' : nil}= link_to 'Transaction details', ledger_transaction_path(transaction)
+
+    - if controller_name == 'accounts'
+      %ul.nav.nav-list
+        %li.nav-header Accounts
+        %li.active= link_to 'Account list', accounts_path
+        %li= link_to 'Add new account', new_account_path, remote: true
+
+    - if controller_name == 'organization_accounts'
+      %ul.nav.nav-list
+        %li.nav-header Organization accounts
+        %li.active= link_to 'Organization account list', organization_accounts_path
+
+    - if controller_name == 'products'
+      %ul.nav.nav-list
+        %li.nav-header Products
+        %li.active= link_to 'Product list', products_path
+        %li= link_to 'Add new product', new_product_path, remote: true
+
+    - if controller_name == 'tax_codes'
+      %ul.nav.nav-list
+        %li.nav-header Tax codes
+        %li.active= link_to 'Tax code list', tax_codes_path
+        %li= link_to 'Add new tax code', new_tax_code_path, remote: true
+
+    - if controller_name == 'payment_forms'
+      %ul.nav.nav-list
+        %li.nav-header Payment forms
+        %li.active= link_to 'Payment form list', payment_forms_path
+        %li= link_to 'Add new payment form', new_payment_form_path, remote: true

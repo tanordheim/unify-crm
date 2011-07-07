@@ -1,0 +1,12 @@
+= simple_form_for [project, milestone] do |f|
+  = f.input :name
+  %div.grid
+    %div.grid-6
+      = f.input :starts_on, as: :date
+
+    %div.grid-6
+      = f.input :ends_on, as: :date
+
+  %div.modal-footer
+    = f.button :submit, 'Create', class: 'btn btn-primary'
+    = link_to 'Cancel', '#', class: 'btn', :'data-dismiss' => 'modal'

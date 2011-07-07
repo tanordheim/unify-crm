@@ -1,0 +1,21 @@
+%span.editable-value
+  %ul.email-addresses.unstyled
+    %li.title
+      %h6 E-mail addresses
+    - if emailable.email_addresses.empty?
+      %li
+        %span.muted No e-mail addresses
+    - else
+      = render emailable.email_addresses
+
+%span.editable-form
+  %ul.email-addresses.unstyled
+    %li.title
+      %h6 E-mail addresses
+    = form.simple_fields_for :email_addresses do |email_form|
+      = render partial: '/email_addresses/field', locals: { form: email_form }
+    %li.add-first{:'data-association' => 'email_addresses'}= link_to 'Add an e-mail address', '#'
+    %li.add-another{:'data-association' => 'email_addresses'}= link_to 'Add another', '#'
+
+= content_for :form_templates do
+  = form_template(form, :email_addresses)

@@ -1,0 +1,4 @@
+%li{:'data-instant-messenger-id' => instant_messenger.id.to_s}
+  = instant_messenger.handle
+  %small.muted= instant_messenger_protocol_name(instant_messenger.protocol_name)
+  %small.muted= instant_messenger_location_name(instant_messenger.location_name)

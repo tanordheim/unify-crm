@@ -1,0 +1,5 @@
+<% unless params[:view_partial].blank? -%>
+  $('.inplace-editable[data-editable-id="<%= params[:editable_id] %>"] .inplace-editable-view').html("<%= escape_javascript(render(partial: params[:view_partial], locals: { model: model })) %>");
+  $('.inplace-editable .inplace-editable-view').show();
+  $('.inplace-editable .inplace-editable-form').hide();
+<% end -%>

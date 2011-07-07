@@ -1,0 +1,8 @@
+- content_for :sidebar do
+  %div.well.content-navigation
+
+    %ul.nav.nav-list
+      %li.nav-header Calendar
+      %li.active= link_to 'Calendar overview', calendar_path
+      %li= link_to 'Add new event', new_event_path, remote: true
+      %li= link_to 'iCal export', calendar_path(format: :ics, user_token: current_user.single_access_token)

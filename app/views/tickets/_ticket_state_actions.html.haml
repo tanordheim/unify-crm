@@ -1,0 +1,13 @@
+.btn-group
+  - if ticket.open?
+    = link_to icon_tag('play'), start_progress_project_ticket_path(ticket.project, ticket), method: :post, remote: true, class: 'btn btn-mini'
+  - elsif ticket.in_progress?
+    = link_to icon_tag('pause'), stop_progress_project_ticket_path(ticket.project, ticket), method: :post, remote: true, class: 'btn btn-mini'
+
+  - if ticket.closed?
+    = link_to icon_tag('eject'), reopen_project_ticket_path(ticket.project, ticket), method: :post, remote: true, class: 'btn btn-mini'
+  - else
+    = link_to icon_tag('stop'), close_project_ticket_path(ticket.project, ticket), method: :post, remote: true, class: 'btn btn-mini'
+
+  = link_to icon_tag(:edit), project_ticket_path(ticket.project, ticket, editor: true), class: 'btn btn-mini'
+  = link_to icon_tag(:'question-sign'), '#', class: 'btn btn-mini', :'data-content' => ticket.description.blank? ? 'No description' : format_description_text(ticket.description).gsub(/'/, '&#146;'), :'data-original-title' => ticket.identifier, :'data-trigger' => 'manual', :'data-toggle' => 'popover', :'data-placement' => 'left'

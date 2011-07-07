@@ -1,0 +1,9 @@
+$.closeModal();
+
+<% if event.errors.any? -%>
+  $.modal("Add new event", "<%= escape_javascript(render('form')) %>", function() {
+    $.updateAddLinkState();
+  });
+<% else -%>
+  $('#calendar').fullCalendar('refetchEvents');
+<% end -%>

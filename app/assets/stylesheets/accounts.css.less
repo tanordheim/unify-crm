@@ -1,0 +1,9 @@
+@import 'app-ui/bootstrap/mixins';
+
+table.accounts-table {
+  .number { #table-column > .min-width(); }
+  .name { #table-column > .max-width(); }
+  .tax-code { #table-column > .min-width(); #table-column > .pull-right(); }
+  .type { #table-column > .min-width(); #table-column > .pull-right(); }
+  .balance { #table-column > .min-width(); #table-column > .pull-right(); }
+}

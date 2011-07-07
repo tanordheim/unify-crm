@@ -1,0 +1,13 @@
+= render '/accounting/sidebar'
+
+%header.page-header
+  %h1 Organization accounts
+
+%table.table.accounts-table
+  %thead
+    %tr
+      %th.number Number
+      %th.name Name
+      %th.balance Balance
+  %tbody
+    = render accounts

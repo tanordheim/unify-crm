@@ -1,0 +1,12 @@
+- employment = employee.employment_for(organization)
+%tr.person{:'data-employment-id' => employment.id}
+  %td.picture
+    = link_to image_tag(employee.image.small.url, alt: employee.name), employee, class: 'thumbnail'
+  %td.information
+    %h5
+      = link_to employee.name, employee
+      %small
+        = best_in_place employment, :title, path: person_employment_path(employee, employment), nil: 'No title'
+    = render partial: '/contacts/list_contact_details', locals: { contact: employee }
+  %td.remove
+    = link_to icon_tag('trash'), person_employment_path(employee, employment), remote: true, method: :delete

@@ -1,0 +1,15 @@
+= render 'sidebar'
+
+%header.page-header
+  %h1 Contacts
+  %ul.filter
+    %li.text Showing
+    %li.dropdown
+      = filter_for :state
+    %li.dropdown
+      = filter_for :type
+    %li.text matching
+    %li.search
+      = filter_for :name
+
+= render 'contacts'

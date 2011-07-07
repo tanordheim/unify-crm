@@ -1,0 +1,55 @@
+- partial_controller = controller_name
+- partial_action = action_name
+!!! 5
+%html{:lang => 'en'}
+  %head
+    %meta{:charset => 'utf-8'}
+    %meta{:'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+    %meta{:name => 'viewport', :content => 'width=device-width, initial-scale=1.0'}
+    %meta{:name => 'description', :content => 'Unify Business Management Suite'}
+    %title= [current_instance.organization.name, 'Unify'].join(' - ')
+
+    /[if lt IE 9]
+      = javascript_include_tag 'http://html5shim.googlecode.com/svn/trunk/html5.js'
+    
+    = stylesheet_link_tag 'application', :media => 'screen, projection'
+    %script{type: 'text/javascript'}
+      :erb
+        var COLOR_PICKER_BUTTON_IMAGE = "<%= image_path('color-picker/ui-colorpicker.png') %>"
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+
+  %body{:class => "#{controller.controller_name}-view"}
+
+    %section.application-header
+      %nav.primary-navigation
+        %ul
+          %li{:class => primary_navigation_class(:dashboard)}= link_to 'Dashboard', root_path
+          %li{:class => primary_navigation_class(:calendar)}= link_to 'Calendar', calendar_path
+          %li{:class => primary_navigation_class(:contacts)}= link_to 'Contacts', contacts_path
+          %li{:class => primary_navigation_class(:deals)}= link_to 'Deals', deals_path
+          %li{:class => primary_navigation_class(:projects)}= link_to 'Projects', projects_path
+          %li{:class => primary_navigation_class(:accounting)}= link_to 'Accounting', accounting_path
+      %nav.secondary-navigation
+        %ul
+          %li= link_to current_user.name, user_path(current_user)
+          %li= link_to current_instance.organization.name, instance_path
+          %li= link_to 'Log out', session_path, :method => :delete
+
+    %section.content-wrapper
+      %section.content
+        - if controller_name == 'dashboard'
+          = yield
+        - else
+          %div.grid
+            %div.grid-9
+              = yield
+            %div.grid-3
+              %aside.sidebar
+                = render '/shared/sidebar'
+
+    %div#flash-message
+      = render_most_important_flash
+
+    %div#form-templates
+      = yield :form_templates

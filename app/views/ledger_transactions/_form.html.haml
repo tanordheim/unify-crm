@@ -1,0 +1,13 @@
+= simple_form_for transaction, html: { multipart: true } do |f|
+
+  %div.grid
+    %div.grid-8
+      = f.input :transacted_on, as: :date
+    %div.grid-8
+      = f.input :description
+
+  = render partial: '/ledger_transaction_attachments/form', locals: { f: f }
+  = render partial: '/ledger_transaction_lines/form', locals: { f: f }
+
+  %div.actions
+    = f.button :submit, 'Save'

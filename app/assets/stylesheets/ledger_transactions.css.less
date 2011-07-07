@@ -1,0 +1,22 @@
+@import 'app-ui/bootstrap/mixins';
+
+table.ledger-transactions-table {
+  .identifier { #table-column > .min-width(); }
+  .transacted-on { #table-column > .min-width(); }
+  .description { #table-column > .max-width(); }
+  .net-amount { #table-column > .min-width(); #table-column > .pull-right(); }
+}
+
+table.ledger-transaction-lines-table, table.ledger-transaction-lines-form {
+  .identifier { #table-column > .min-width(); }
+  .account { #table-column > .min-width(); }
+  .description { #table-column > .max-width(); }
+  .debit { #table-column > .min-width(); #table-column > .pull-right(); }
+  .credit { #table-column > .min-width(); #table-column > .pull-right(); }
+}
+
+table.ledger-transaction-attachments-table {
+  .identifier { #table-column > .min-width(); }
+  .filename { #table-column > .max-width(); }
+  .size { #table-column > .min-width(); #table-column > .pull-right(); }
+}

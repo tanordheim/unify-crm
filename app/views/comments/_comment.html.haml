@@ -1,0 +1,15 @@
+%tr.comment{:'data-comment-id' => comment.id.to_s}
+  %td.picture
+    = link_to image_tag(comment.user.image.small.url, alt: comment.user.name), comment.user, class: 'thumbnail'
+  %td.username
+    = link_to comment.user.username, comment.user
+  %td.comment
+    - unless commentable == comment.commentable
+      For
+      = link_to commentable_name(comment), commentable_url(comment)
+      &mdash;
+    = format_comment_text(comment.body)
+  %td.date.muted
+    = comment.created_at.strftime('%H:%M')
+    %br
+    = comment.created_at.strftime('%b %d')

@@ -1,0 +1,5 @@
+<% unless address.errors.any? -%>
+  $.getScript('/<%= addressable_type.to_s.pluralize %>/<%= addressable_id %>/addresses', function() {
+    $('li[data-address-id="<%= address.id.to_s %>"]').effect('highlight', {}, 'fast');
+  });
+<% end %>

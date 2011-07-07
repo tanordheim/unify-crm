@@ -1,0 +1,9 @@
+@import 'app-ui/bootstrap/mixins';
+
+table.api-applications-table {
+  .name { #table-column > .max-width(); }
+  .key { #table-column > .min-width(); }
+  .token { #table-column > .min-width(); }
+  .sso-callback-url { #table-column > .min-width(); }
+  .sso-enabled { #table-column > .min-width(); #table-column > .pull-right(); }
+}

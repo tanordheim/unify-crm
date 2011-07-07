@@ -1,0 +1,7 @@
+$.closeModal();
+<% if product.errors.any? -%>
+  $.modal("Add new product", "<%= escape_javascript(render('form')) %>");
+<% else -%>
+  $('table.products-table').replaceWith("<%= escape_javascript(render('products')) %>");
+  $('tr[data-product-id="<%= product.id %>"]').effect('highlight', {}, 500);
+<% end -%>

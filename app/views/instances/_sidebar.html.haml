@@ -1,0 +1,49 @@
+- content_for :sidebar do
+  %div.well.content-navigation
+
+    %ul.nav.nav-list
+      %li.nav-header Unify instance
+      %li{class: controller_name == 'instances' ? 'active' : nil}= link_to 'Instance settings', instance_path
+      %li= link_to 'Users', users_path
+      %li= link_to 'Sources', sources_path
+      %li= link_to 'Event categories', event_categories_path
+      %li= link_to 'Deal categories', deal_categories_path
+      %li= link_to 'Deal stages', deal_stages_path
+      %li= link_to 'Project categories', project_categories_path
+      %li= link_to 'Ticket categories', ticket_categories_path
+      %li= link_to 'API applications', api_applications_path
+
+    - if controller_name == 'users'
+      %ul.nav.nav-list
+        %li.nav-header Users
+        %li{class: action_name == 'index' ? 'active' : nil}= link_to 'User list', users_path
+        %li{class: user.new_record? && %w(new create).include?(action_name) ? 'active' : nil}= link_to 'Add a new user', new_user_path
+
+      - if respond_to?(:user) && !user.new_record?
+        %ul.nav.nav-list
+          %li.nav-header= user.username
+          %li.active= link_to 'User details', user
+
+    - if controller_name == 'sources'
+      %ul.nav.nav-list
+        %li.nav-header Sources
+        %li.active= link_to 'Source list', sources_path
+        %li= link_to 'Add a new source', new_source_path, remote: true
+
+    - if controller_name =~ /categories$/
+      %ul.nav.nav-list
+        %li.nav-header= controller_name.titleize
+        %li.active= link_to 'Category list', url_for(controller: controller_name, action: :index)
+        %li= link_to 'Add a new category', url_for(controller: controller_name, action: :new), remote: true
+
+    - if controller_name == 'deal_stages'
+      %ul.nav.nav-list
+        %li.nav-header Deal stages
+        %li.active= link_to 'Stage list', deal_stages_path
+        %li= link_to 'Add a new stage', new_deal_stage_path, remote: true
+
+    - if controller_name == 'api_applications'
+      %ul.nav.nav-list
+        %li.nav-header API applications
+        %li.active= link_to 'Application list', api_applications_path
+        %li= link_to 'Add a new application', new_api_application_path, remote: true

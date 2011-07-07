@@ -1,0 +1,46 @@
+= content_for :title do
+  Project Name:
+  Milestone Name
+  Change Log
+
+%h1{style: email_primary_header_css}
+  Project Name
+  %small{style: email_primary_header_subtext_css}
+    Milestone Name
+    Change Log
+
+%p{style: email_paragraph_css}
+  The table below contains all resolved tickets for the
+  Milestone Name
+  milestone of the
+  Unify
+  project.
+
+%table{style: email_table_css}
+  %thead
+    %tr
+      %th{style: "#{email_table_header_css} width: 1px; white-space: nowrap;"} ID
+      %th{style: "#{email_table_header_css} width: 100%;"} Name
+      %th{style: "#{email_table_header_css} width: 1px; white-space: nowrap; text-align: right;"} Category
+      %th{style: "#{email_table_header_css} width: 1px; white-space: nowrap; text-align: right;"} Component
+  %tbody
+    %tr
+      %td{style: "#{email_table_cell_css} width: 1px; white-space: nowrap; font-weight: bold;"} PROJECT_8-7
+      %td{style: "#{email_table_cell_css} width: 100%;"}
+        %h5{style: email_bold_header_css} Quo libero quos unde corporis.
+        %span{style: email_muted_text_css}
+          Foo bar description.
+          %br
+          Bar baz description.
+      %td{style: "#{email_table_cell_css} width: 1px; white-space: nowrap; text-align: right;"}
+        %span{style: "#{email_label_css} background-color: #3185c5;"} Issue
+      %td{style: "#{email_table_cell_css} width: 1px; white-space: nowrap; text-align: right;"}
+        Foo
+    %tr
+      %td{style: "#{email_table_cell_css} width: 1px; white-space: nowrap;"} PROJECT_8-7
+      %td{style: "#{email_table_cell_css} width: 100%;"}
+        %h5{style: email_bold_header_css} Quo libero quos unde corporis.
+      %td{style: "#{email_table_cell_css} width: 1px; white-space: nowrap; text-align: right;"}
+        %span{style: email_muted_text_css} None
+      %td{style: "#{email_table_cell_css} width: 1px; white-space: nowrap; text-align: right;"}
+        %span{style: email_muted_text_css} None

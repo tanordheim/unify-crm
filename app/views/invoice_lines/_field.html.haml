@@ -1,0 +1,7 @@
+%tr.field
+  %td= form.input_field :product_id, collection: products, include_blank: false
+  %td= form.input_field :description
+  %td= form.input_field :price_per
+  %td= form.input_field :quantity
+  %td.row-actions
+    = link_to icon_tag('trash'), '#', :'data-destroy-association' => true

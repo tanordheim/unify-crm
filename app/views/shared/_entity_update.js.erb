@@ -1,0 +1,7 @@
+$('.entity-info').replaceWith("<%= escape_javascript(render("/#{model.class.name.underscore.pluralize}/entity_info")) %>");
+
+<% if model.errors.any? -%>
+  $.startEntityEditing()
+<% else -%>
+  $.stopEntityEditing()
+<% end -%>

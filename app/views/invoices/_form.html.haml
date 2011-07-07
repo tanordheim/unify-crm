@@ -1,0 +1,16 @@
+= simple_form_for invoice do |f|
+
+  %div.grid
+    %div.grid-8
+      = f.input :organization_id, collection: organizations, include_blank: false
+      = f.input :biller_reference
+      = f.input :billed_on, as: :date
+    %div.grid-8
+      = f.input :project_id, collection: projects
+      = f.input :organization_reference
+      = f.input :due_on, as: :date
+
+  = render partial: '/invoice_lines/form', locals: { f: f }
+
+  %div.actions
+    = f.button :submit, 'Save'

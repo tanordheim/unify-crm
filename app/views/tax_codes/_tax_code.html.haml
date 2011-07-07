@@ -1,0 +1,7 @@
+%tr{:'data-tax-code-id' => tax_code.id}
+  %td.code= tax_code.code
+  %td.name= tax_code.name
+  %td.account== #{tax_code.target_account.number} - #{tax_code.target_account.name}
+  %td.percentage== #{tax_code.percentage}%
+  %td.row-actions
+    = link_to 'Edit', [:edit, tax_code], remote: true, class: 'edit-action'

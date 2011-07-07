@@ -1,0 +1,20 @@
+%div#invoice-view
+  = render '/accounting/sidebar'
+  = render 'entity_info'
+
+  - unless invoice.draft?
+    %h2
+      Payments
+      - unless invoice.paid?
+        %small= link_to 'Add a payment', new_invoice_payment_path(invoice), remote: true, class: 'btn btn-mini'
+    - if invoice.payments.empty?
+      %p There are no payments registered on this invoice.
+    - else
+      %table.table.invoice-payments-table
+        %thead
+          %tr
+            %th.date Date
+            %th.amount Amount
+            %th.payment-form Paid via
+        %tbody
+          = render invoice.payments

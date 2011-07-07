@@ -1,0 +1,13 @@
+%article.widget.my-tickets-widget{:'id' => @config.widget_id, :'data-widget-id' => @config.id}
+  = render view: :header, locals: { title: 'My Tickets' }
+  %article
+    %table.tickets.zebra-striped.bordered
+      %thead
+        %tr
+          %th.id ID
+          %th.name Name
+          %th.category Category
+          %th.status Status
+          %th.row-actions
+      %tbody
+        = render partial: 'ticket', collection: @tickets

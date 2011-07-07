@@ -1,0 +1,3 @@
+$('li[data-address-id="<%= address.id.to_s %>"]').slideUp('fast', function() {
+  $.getScript('/<%= addressable_type.to_s.pluralize %>/<%= addressable_id %>/addresses');
+});

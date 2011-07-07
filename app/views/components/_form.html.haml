@@ -1,0 +1,4 @@
+= simple_form_for [project, component], remote: true do |f|
+  = f.input :name
+  %div.modal-footer
+    = f.button :submit, 'Save', class: 'btn btn-primary'

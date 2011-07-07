@@ -1,0 +1,17 @@
+%table.table.invoices-table
+  %thead
+    %tr
+      %th.identifier
+        = link_to '#', url_for_filter(order: :identifier), remote: true
+      %th.organization Organization
+      %th.amount Amount
+      %th.billed-on
+        = link_to 'Billed on', url_for_filter(order: :billed_on), remote: true
+      %th.due-on
+        = link_to 'Due on', url_for_filter(order: :due_on), remote: true
+      %th.state State
+  %tbody
+    = render self.invoices
+    %tr.pagination
+      %td{colspan: 6}
+        = paginate self.invoices, remote: true

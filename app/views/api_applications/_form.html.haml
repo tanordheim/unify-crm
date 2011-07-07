@@ -1,0 +1,11 @@
+= simple_form_for application, remote: true do |f|
+  %div.grid
+    %div.grid-6
+      = f.input :name
+      = f.input :key
+    %div.grid-6
+      = f.input :sso_callback_url
+      = f.input :sso_enabled, as: :boolean
+
+  %div.modal-footer
+    = f.button :submit, 'Save', class: 'btn'

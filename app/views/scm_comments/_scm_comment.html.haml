@@ -1,0 +1,43 @@
+%tr.comment.scm-comment{:'data-comment-id' => scm_comment.id.to_s, class: "#{scm_comment.scm_name}-scm-comment"}
+  %td.picture
+    = link_to image_tag(scm_comment.user.image.small.url, alt: scm_comment.user.name), scm_comment.user, class: 'thumbnail'
+  %td.username
+    = link_to scm_comment.user.username, scm_comment.user
+  %td.comment
+    = link_to "Via #{t("scm_comments.scm.#{scm_comment.scm_name}")}", scm_comment_repository_url(scm_comment)
+    - unless commentable == scm_comment.commentable
+      for
+      = link_to commentable_name(scm_comment), commentable_url(scm_comment)
+    &mdash;
+    = newline_to_br(scm_comment.body)
+    = link_to content_tag(:span, 'Show files', class: 'muted'), '#', :'data-toggle' => 'scm-comment-files'
+    %div.scm-comment-files
+      %div.grid
+        %div.grid-1-3
+          %h6 Added files
+          - if scm_comment.files.added.empty?
+            %p No files were added in this commit.
+          - else
+            %ul
+              = render scm_comment.files.added
+
+        %div.grid-1-3
+          %h6 Changed files
+          - if scm_comment.files.changed.empty?
+            %p No files were changd in this commit.
+          - else
+            %ul
+              = render scm_comment.files.changed
+
+        %div.grid-1-3
+          %h6 Removed files
+          - if scm_comment.files.removed.empty?
+            %p No files were removed in this commit.
+          - else
+            %ul
+              = render scm_comment.files.removed
+      
+  %td.date.muted
+    = scm_comment.created_at.strftime('%H:%M')
+    %br
+    = scm_comment.created_at.strftime('%b %d')

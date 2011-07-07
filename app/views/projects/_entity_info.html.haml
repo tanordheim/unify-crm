@@ -1,0 +1,74 @@
+= entity_info_form project do |form|
+  %header.page-header
+    %h1
+      %span.editable-value
+        = project.name
+      %span.editable-form
+        = form.input_field :name, placeholder: 'Project name'
+
+    %nav.actions
+      - unless project.new_record?
+        = link_to icon_tag('trash', 'Close', color: :white), project_path(project), method: :delete, remote: true, confirm: 'Are you sure you want to close this project?', class: 'btn btn-small btn-danger'
+        = link_to icon_tag('edit', 'Edit', color: :white), '#', class: 'btn btn-info btn-small', :'data-start-editing' => true
+        = link_to icon_tag('remove', 'Cancel'), '#', class: 'btn btn-small', :'data-cancel-editing' => true
+      = form.button :submit, icon_tag('ok', 'Save', color: :white), class: 'btn btn-info btn-small'
+    
+  - if project.closed?
+    %div.alert.alert-block.alert-danger
+      %h4.alert-heading This project is closed.
+      %p
+        This project is currently flagged as closed, and will not appear in project lists throughout Unify. If you want to restore this project, you can do so below.
+      %p
+        = link_to 'Restore project', restore_project_path(project), method: :post, remote: true, confirm: 'Are you sure you want to restore this project?', class: 'btn btn-small'
+    
+  %div.grid
+    %div.grid-6
+      %div.well.description
+        %span.editable-value
+          - if project.description.blank?
+            %span.muted No description set.
+          - else
+            = format_description_text(project.description)
+        %span.editable-form
+          = form.input_field :description, as: :text, placeholder: 'Description'
+
+      %div.grid
+        %div.grid-6
+          %div.info-block.category
+            = render partial: '/categories/entity_category', locals: { entity: project, form: form }
+          %div.info-block.project-key
+            %h6 Project key
+            %span.editable-value
+              = project.key
+            %span.editable-form
+              = form.input_field :key, placeholder: 'Key'
+        %div.grid-6
+          %div.info-block.source
+            = render partial: '/sources/entity_source', locals: { entity: project, form: form }
+          %div.info-block.ticket-progress
+            %span.editable-value
+              %h6 Progress
+              = ticket_progress_bar(project.ticket_progress)
+          
+    %div.grid-6
+      %div.info-block.organization
+        = render partial: '/organizations/entity_organization', locals: { entity: project, form: form }
+      %div.info-block.members
+        %h6 Members
+        %span.editable-value
+          %ul.project-members.unstyled
+            - if project.members.empty?
+              %li
+                %span.muted No members
+            - else
+              = project.members.map { |member| link_to(member.user.name, member.user) }.to_sentence.html_safe
+
+        %span.editable-form
+          %ul.project-members.unstyled
+            = form.simple_fields_for :members do |members_form|
+              = render partial: '/project_members/field', locals: { form: members_form }
+            %li.add-first{:'data-association' => 'members'}= link_to 'Add a member', '#'
+            %li.add-another{:'data-association' => 'members'}= link_to 'Add another', '#'
+
+        = content_for :form_templates do
+          = form_template(form, :members, partial: '/project_members/field')

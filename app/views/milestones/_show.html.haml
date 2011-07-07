@@ -1,0 +1,24 @@
+%div#project-view
+  = render '/projects/sidebar'
+  = render 'entity_info'
+
+  %header.page-header
+    %h2 Tickets for this milestone
+    %ul.filter
+      %li.text Showing
+      %li.dropdown
+        = filter_for :status
+      %li.text tickets in
+      %li.dropdown
+        = filter_for :category
+      %li.text for
+      %li.dropdown
+        = filter_for :component
+      %li.text assigned to
+      %li.dropdown
+        = filter_for :assignee
+      %li.text matching
+      %li.search
+        = filter_for :keywords
+
+  = render 'tickets'

@@ -1,0 +1,10 @@
+%li
+  = form.input_field :street_name, as: :text, placeholder: 'Street name', class: 'street-name'
+  %div.zip-city-state
+    = form.input_field :zip_code, class: 'zip-code', placeholder: 'Zip'
+    = form.input_field :city, class: 'city', placeholder: 'City'
+    = form.input_field :state, class: 'state', placeholder: 'State'
+  %div.location-country
+    = form.input_field :location, collection: address_location_collection, include_blank: false, class: 'location'
+    = form.input_field :country, include_blank: true, class: 'country'
+  = link_to icon_tag('trash'), '#', :'data-destroy-association' => true

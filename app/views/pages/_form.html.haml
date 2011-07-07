@@ -1,0 +1,6 @@
+= simple_form_for [project, page] do |f|
+  = f.input :name
+  = f.input :body, as: :text
+
+  %div.form-actions
+    = f.button :submit, page.new_record? ? 'Create page' : 'Update page', class: 'btn btn-primary'

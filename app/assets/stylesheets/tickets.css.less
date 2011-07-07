@@ -1,0 +1,137 @@
+@import 'app-ui/bootstrap/globals';
+@import 'app-ui/bootstrap/mixins';
+
+table.tickets-table {
+  tr.ticket-in-progress {
+    td { font-style: italic; }
+  }
+
+  tr.ticket-closed {
+    td { text-decoration: line-through; }
+  }
+
+  .select, .id { #table-column > .min-width(); }
+  .name { #table-column > .max-width(); }
+  .milestone { #table-column > .min-width(); }
+  .project { #table-column > .min-width(); }
+  .category { #table-column > .min-width(); #table-column > .pull-right(); }
+  .component { #table-column > .min-width(); #table-column > .pull-right(); }
+  .priority { #table-column > .min-width(); #table-column > .pull-right(); }
+  .estimate {
+    #table-column > .min-width();
+    #table-column > .pull-right();
+
+    .ticket-estimate-form {
+      display: none;
+      position: relative;
+
+      input {
+        width: 30px;
+        margin-right: 5px;
+        text-align: right;
+      }
+
+      span {
+        position: relative;
+        top: -3px;
+      }
+    }
+
+    .ticket-estimate-value {
+      border-bottom: 1px dotted rgba(0, 0, 0, 0.3);
+    }
+  }
+  .status { #table-column > .min-width(); #table-column > .pull-right(); }
+  .due-on {
+    #table-column > .min-width();
+    #table-column > .pull-right();
+
+    .ticket-due-on-form {
+      display: none;
+
+      input {
+        width: 70px;
+      }
+    }
+
+    .ticket-due-on-value {
+      border-bottom: 1px dotted rgba(0, 0, 0, 0.3);
+    }
+  }
+  .assignee { #table-column > .min-width(); #table-column > .pull-right(); }
+}
+
+table {
+  td.ticket-progress {
+    width: 150px;
+    white-space: nowrap;
+  }
+}
+
+.ticket-progress {
+  @progressBarColor: darken(@brandColor, 27);
+
+  .progress-bar {
+    display: block;
+    border: 1px solid #1c1c1c;
+    background-color: #313131;
+    .box-shadow(0 0 1px #666, 0 1px 1px #222 inset);
+    background-image: -webkit-linear-gradient(#323232, #2E2E2E 50%, #323232);
+    background-image: -moz-linear-gradient(#323232, #2E2E2E 50%, #323232);
+    background-image: -o-linear-gradient(#323232, #2E2E2E 50%, #323232);
+    position: relative;
+
+    > div {
+      height: 18px;
+      border-right: 1px solid #282828;
+      background-color: #5387ba;
+      .box-shadow(0 0 1px #ddd inset);
+      #gradient > .navigationTab(@progressBarColor);
+      text-indent: -999em;
+    }
+
+    >span {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: #fff;
+      font-size: 11px;
+      line-height: 18px;
+      padding-right: 5px;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+    }
+  }
+  small {
+    font-size: 10px;
+    color: #bfbfbf;
+  }
+}
+
+#ticket-actions-wrapper {
+  position: relative;
+  opacity: 0.4;
+
+  #ticket-actions {
+    > li {
+      display: inline-block;
+    }
+  }
+
+  .disabled-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: transparent;
+  }
+
+  &.active {
+    opacity: 1;
+
+    .disabled-overlay {
+      display: none;
+    }
+  }
+}

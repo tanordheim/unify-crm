@@ -1,0 +1,11 @@
+%tr
+  %td.product= invoice_line.product.name
+  %td.description= invoice_line.description
+  %td.price-per= format_currency(invoice_line.price_per)
+  %td.quantity= invoice_line.quantity
+  %td.tax-percentage
+    - if invoice_line.tax_percentage.blank? || invoice_line.tax_percentage == 0
+      None
+    - else
+      == #{invoice_line.tax_percentage}%
+  %td.total= format_currency(invoice_line.total_cost)

@@ -1,0 +1,18 @@
+= form_tag application.sso_callback_url, method: :get do
+  = hidden_field_tag :sso_token, application.encrypt_sso_token_for_user(current_user)
+  %fieldset
+    %legend
+      Log in to
+      = application.name
+
+    %div.alert.alert-warning
+      The application
+      %strong= application.name
+      has requested you to log in via Unify.
+
+    .form-actions
+      .grid
+        .grid-8
+          &nbsp;
+        .grid-4
+          = submit_tag 'Log in', class: 'btn btn-primary'

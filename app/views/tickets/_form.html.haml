@@ -1,0 +1,13 @@
+= simple_form_for [project, ticket], remote: true do |f|
+  = f.input :milestone_id, as: :hidden
+
+  %div.grid
+    %div.grid-6
+      = f.input :name
+
+    %div.grid-6
+      = f.input :category_id, collection: categories, include_blank: false
+
+  %div.modal-footer
+    = f.button :submit, 'Create', class: 'btn btn-primary'
+    = link_to 'Cancel', '#', class: 'btn', :'data-dismiss' => 'modal'

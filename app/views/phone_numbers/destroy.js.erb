@@ -1,0 +1,3 @@
+$('li[data-phone-number-id="<%= phone_number.id.to_s %>"]').slideUp('fast', function() {
+  $.getScript('/<%= phoneable_type.to_s.pluralize %>/<%= phoneable_id %>/phone_numbers');
+});

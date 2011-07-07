@@ -1,0 +1,4 @@
+%li
+  = form.input_field :username, placeholder: 'Username', class: 'username'
+  = form.input_field :location, collection: twitter_account_location_collection, include_blank: false, class: 'location'
+  = link_to icon_tag('trash'), '#', :'data-destroy-association' => true

@@ -1,0 +1,38 @@
+.entity-info {
+  span.editable-value { display: block; }
+  span.editable-form { display: none; }
+
+  [data-start-editing] { display: inline-block; }
+  [data-cancel-editing] { display: none; }
+  button[type="submit"] { display: none; }
+
+  &.in-editing {
+    span.editable-value { display: none; }
+    span.editable-form { display: block; }
+
+    [data-start-editing] { display: none; }
+    [data-cancel-editing] { display: inline-block; }
+    button[type="submit"] { display: inline-block; }
+  }
+
+  .page-header {
+
+    &.with-picture {
+      position: relative;
+
+      img {
+        position: absolute;
+        top: -10px;
+        left: 0;
+      }
+
+      h1 {
+        padding-left: 65px;
+      }
+    }
+  }
+
+  .info-block {
+    margin-bottom: 10px;
+  }
+}

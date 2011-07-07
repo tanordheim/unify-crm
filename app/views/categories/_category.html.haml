@@ -1,0 +1,7 @@
+%tr{:'data-category-id' => category.id}
+  %td.name= category.name
+  %td.color
+    = category_label(category)
+  %td.row-actions
+    = link_to 'Edit', [:edit, category], remote: true, class: 'edit-action'
+    = link_to 'Delete', category, remote: true, method: :delete, class: 'delete-action', confirm: 'Are you sure you want to remove this category?'

@@ -1,0 +1,16 @@
+if ($('table.tickets-table[data-milestone-id]').length > 0) {
+
+  // Milestone ticket list.
+  var milestoneId = $('table.tickets-table[data-milestone-id]').attr('data-milestone-id');
+  $.getScript("/projects/<%= ticket.project.id %>/milestones/" + milestoneId + '?<%= filters.values.map(&:to_param).join('&') %>', function() {
+    $('tr[data-ticket-id="<%= ticket.id %>"]').effect('highlight', {}, 500);
+  });
+
+} else if ($('table.tickets-table').length > 0) {
+
+  // Full ticket list.
+  $.getScript("/projects/<%= ticket.project.id %>/tickets?<%= filters.values.map(&:to_param).join('&') %>", function() {
+    $('tr[data-ticket-id="<%= ticket.id %>"]').effect('highlight', {}, 500);
+  });
+
+}

@@ -1,0 +1,11 @@
+%header.page-header.entity-header.project-header
+  %div.grid
+    %div.grid-8.name
+      %h1= project.name
+      %p
+        = category_label(project.category)
+        = project.description
+
+    %div.grid-8.information
+      %ul
+        %li.organization= link_to project.organization.name, project.organization

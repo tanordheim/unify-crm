@@ -1,0 +1,5 @@
+%tr
+  %td.identifier= ledger_transaction_attachment.identifier
+  %td.filename
+    = link_to ledger_transaction_attachment.filename, download_ledger_transaction_attachment_path(ledger_transaction_attachment.ledger_transaction, ledger_transaction_attachment)
+  %td.size= number_to_human_size(ledger_transaction_attachment.size)

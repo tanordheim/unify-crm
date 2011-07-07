@@ -1,0 +1,119 @@
+= entity_info_form invoice do |form|
+  %header.page-header
+    %h1
+      Invoice
+      - if invoice.draft?
+        draft
+      - else
+        == ##{invoice.identifier}
+
+    %nav.actions
+      - if !invoice.new_record? && !invoice.generated?
+        = link_to icon_tag('exclamation-sign', 'Generate', color: :white), generate_invoice_path(invoice), method: :post, confirm: 'Are you sure you want to generate this invoice? This will lock the invoice, and no future changes to the invoice will be possible.', class: 'btn btn-danger btn-small'
+        = link_to icon_tag('edit', 'Edit', color: :white), '#', class: 'btn btn-info btn-small', :'data-start-editing' => true
+        = link_to icon_tag('remove', 'Cancel'), '#', class: 'btn btn-small', :'data-cancel-editing' => true
+      = form.button :submit, icon_tag('ok', 'Save', color: :white), class: 'btn btn-info btn-small'
+
+  %div.grid
+    %div.grid-6
+      %div.well.description
+        %span.editable-value
+          - if invoice.description.blank?
+            %span.muted No description set.
+          - else
+            = newline_to_br(invoice.description)
+        %span.editable-form
+          = form.input_field :description, as: :text, placeholder: 'Description'
+
+      %div.grid
+        %div.grid-6
+          %div.info-block.biller-reference
+            %h6 Biller reference
+            %span.editable-value
+              - if invoice.biller_reference.blank?
+                %span.muted Not set.
+              - else
+                = invoice.biller_reference
+            %span.editable-form
+              = form.input_field :biller_reference, placeholder: 'Biller reference'
+        %div.grid-6
+          %div.info-block.organization-reference
+            %h6 Organization reference
+            %span.editable-value
+              - if invoice.organization_reference.blank?
+                %span.muted Not set.
+              - else
+                = invoice.organization_reference
+            %span.editable-form
+              = form.input_field :organization_reference, placeholder: 'Organization reference'
+
+    %div.grid-6
+      %div.grid
+        %div.info-block.organization
+          = render partial: '/organizations/entity_organization', locals: { entity: invoice, form: form }
+        
+      %div.grid
+        %div.grid-6
+          %div.info-block.billed-on
+            %h6 Billed on
+            %span.editable-value
+              - if invoice.billed_on.blank?
+                %span.muted No date set.
+              - else
+                = l(invoice.billed_on, format: :long)
+            %span.editable-form
+              = form.input_field :billed_on, as: :date, placeholder: 'Date'
+
+        %div.grid-6
+          %div.info-block.due-on
+            %h6 Due on
+            %span.editable-value
+              - if invoice.due_on.blank?
+                %span.muted No date set.
+              - else
+                = l(invoice.due_on, format: :long)
+            %span.editable-form
+              = form.input_field :due_on, as: :date, placeholder: 'Date'
+
+      %div.grid
+        %div.grid-6
+          %div.info-block.project
+            %h6 Project
+            %span.editable-value
+              - if invoice.project.blank?
+                %span.muted No project.
+              - else
+                = link_to invoice.project.name, invoice.project
+            %span.editable-form
+              = form.input_field :project_id, collection: projects, include_blank: true
+          
+        %div.grid-6
+          %span.editable-value
+            %div.info-block.state
+              %h6 State
+              = invoice_state(invoice)
+              - if invoice.partially_paid?
+                &mdash;
+                = format_currency(invoice.outstanding_amount)
+                outstanding
+
+  %div.grid
+    %h6 Invoice lines
+    %span.editable-value
+      %table.table.invoice-lines-table
+        %thead
+          %tr
+            %th.product Product
+            %th.description Description
+            %th.price-per Price per
+            %th.quantity Qty
+            %th.tax-percentage Tax%
+            %th.total Total
+        %tbody
+          = render invoice.lines
+        %tfoot
+          %tr
+            %td{colspan: 5} Total
+            %td.total= format_currency(invoice.total_cost)
+    %span.editable-form
+      = render partial: '/invoice_lines/form', locals: { form: form }

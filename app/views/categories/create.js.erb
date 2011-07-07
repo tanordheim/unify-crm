@@ -1,0 +1,9 @@
+$.closeModal();
+<% if category.errors.any? -%>
+  $.modal("Add new category", "<%= escape_javascript(render('form')) %>", function() {
+    $.configureColorPickers();
+  });
+<% else -%>
+  $('table.categories-table').replaceWith("<%= escape_javascript(render('categories')) %>");
+  $('tr[data-category-id="<%= category.id %>"]').effect('highlight', {}, 500);
+<% end -%>

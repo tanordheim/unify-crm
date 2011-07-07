@@ -1,0 +1,12 @@
+- content_for :sidebar do
+  %div.well.content-navigation
+
+    %ul.nav.nav-list
+      %li.nav-header Deals
+      %li{class: action_name == 'index' ? 'active' : nil}= link_to 'Deal list', deals_path
+      %li{class: deal.new_record? && %w(new create).include?(action_name) ? 'active' : nil}= link_to 'Add a new deal', new_deal_path
+
+    - if respond_to?(:deal) && !deal.new_record?
+      %ul.nav.nav-list
+        %li.nav-header= deal.name
+        %li{class: %w(create show).include?(action_name) ? 'active' : nil}= link_to "Deal details", deal

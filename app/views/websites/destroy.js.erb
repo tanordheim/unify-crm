@@ -1,0 +1,3 @@
+$('li[data-website-id="<%= website.id.to_s %>"]').slideUp('fast', function() {
+  $.getScript('/<%= websiteable_type.to_s.pluralize %>/<%= websiteable_id %>/websites');
+});

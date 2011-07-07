@@ -1,0 +1,8 @@
+%table.comments-table.table.table-condensed
+  %tbody
+    - self.comments.each do |comment|
+      - type = comment.class.name.underscore
+      = render partial: "/#{type.pluralize}/#{type}", locals: { :"#{type}" => comment, commentable: commentable }
+    %tr.pagination
+      %td{colspan: 4}
+        = paginate self.comments, param_name: :comment_page, params: { controller: :comments, action: nil, id: nil, commentable_type: commentable.class.name.underscore.pluralize, commentable_id: commentable.id.to_s }, remote: true

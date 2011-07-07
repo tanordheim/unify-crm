@@ -1,0 +1,8 @@
+%tr{:'data-ledger-transaction-id' => ledger_transaction.id}
+  %td.identifier= link_to ledger_transaction.identifier, ledger_transaction
+  %td.transacted-on= l(ledger_transaction.transacted_on, format: :short)
+  %td.description= ledger_transaction.description
+  %td.net-amount= format_currency(ledger_transaction.net_amount)
+  %td.row-actions
+    - unless ledger_transaction.locked?
+      = link_to 'Edit', [:edit, ledger_transaction], class: 'edit-action'

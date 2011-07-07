@@ -1,0 +1,28 @@
+%div#milestone-view
+  = render '/projects/sidebar'
+  %header.page-header
+    %h1
+      = milestone.name
+      %small= project.name
+    %nav.actions
+      = link_to icon_tag(:envelope, 'Notify', color: :white), notify_project_milestone_path(milestone.project, milestone), method: :post, remote: true, class: 'btn btn-small btn-info', confirm: 'This will send an e-mail to all project members with information about this release. Are you sure you want to proceed?'
+
+  %table.table.tickets-table
+    %thead
+      %tr
+        %th.id ID
+        %th.name Name
+        %th.category Category
+        %th.component Component
+    %tbody
+      - resolved_tickets.each do |ticket|
+        %tr
+          %td.id= link_to ticket.identifier, project_ticket_path(ticket.project, ticket)
+          %td.name= ticket.name
+          %td.category
+            = category_label(ticket.category)
+          %td.component
+            - if ticket.component.blank?
+              %span.muted None
+            - else
+              = ticket.component.name

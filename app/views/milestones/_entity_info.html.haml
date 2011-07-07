@@ -1,0 +1,64 @@
+= entity_info_form [project, milestone] do |form|
+  %header.page-header
+    %h1
+      %span.editable-value
+        = milestone.name
+      %span.editable-form
+        = form.input_field :name, placeholder: 'Milestone name'
+
+    %nav.actions
+      - unless milestone.new_record?
+        = link_to icon_tag('trash', 'Close', color: :white), project_milestone_path(milestone.project, milestone), method: :delete, remote: true, confirm: 'Are you sure you want to close this milestone? Any non-completed tickets still present in the milestone will be left without a milestone associated with it.', class: 'btn btn-small btn-danger'
+        = link_to icon_tag('edit', 'Edit', color: :white), '#', class: 'btn btn-info btn-small', :'data-start-editing' => true
+        = link_to icon_tag('remove', 'Cancel'), '#', class: 'btn btn-small', :'data-cancel-editing' => true
+      = form.button :submit, icon_tag('ok', 'Save', color: :white), class: 'btn btn-info btn-small'
+      - unless milestone.new_record?
+        - unless previous_milestone.blank?
+          = link_to icon_tag(:'arrow-left'), project_milestone_path(previous_milestone.project, previous_milestone), class: 'btn btn-small'
+        - unless next_milestone.blank?
+          = link_to icon_tag(:'arrow-right'), project_milestone_path(next_milestone.project, next_milestone), class: 'btn btn-small'
+
+  - if milestone.closed?
+    %div.alert.alert-block.alert-danger
+      %h4.alert-heading This milestone is closed
+      %p
+        This milestone is currently flagged as closed, and will not appear in milestone lists throughout Unify. If you want to restore this milestone, you can do so below.
+      %p
+        = link_to 'Restore milestone', restore_project_milestone_path(milestone.project, milestone), method: :post, remote: true, confirm: 'Are you sure you want to restore this milestone?', class: 'btn btn-small'
+
+  %div.grid
+    %div.grid-6
+      %div.well.description
+        %span.editable-value
+          - if milestone.description.blank?
+            %span.muted No description set.
+          - else
+            = format_description_text(milestone.description)
+        %span.editable-form
+          = form.input_field :description, as: :text, placeholder: 'Description'
+
+    %div.grid-6
+      %div.info-block.project
+        %h6 Project
+        = link_to project.name, project
+
+      %div.grid
+        %div.grid-6
+          %h6 Starts on
+          %span.editable-value
+            - if milestone.starts_on.blank?
+              %span.muted No start date set.
+            - else
+              = l(milestone.starts_on, format: :short)
+          %span.editable-form
+            = form.input_field :starts_on, as: :date, placeholder: 'Date'
+
+        %div.grid-6
+          %h6 Ends on
+          %span.editable-value
+            - if milestone.ends_on.blank?
+              %span.muted No end date set.
+            - else
+              = l(milestone.ends_on, format: :short)
+          %span.editable-form
+            = form.input_field :ends_on, as: :date, placeholder: 'Date'

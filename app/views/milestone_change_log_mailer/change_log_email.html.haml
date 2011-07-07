@@ -1,0 +1,43 @@
+= content_for :title do
+  == #{@project.name}:
+  = @milestone.name
+  Change Log
+
+%h1{style: email_primary_header_css}
+  = @project.name
+  %small{style: email_primary_header_subtext_css}
+    = @milestone.name
+    Change Log
+
+%p{style: email_paragraph_css}
+  The table below contains all resolved tickets for the
+  = @milestone.name
+  milestone of the
+  = @project.name
+  project.
+
+%table{style: email_table_css}
+  %thead
+    %tr
+      %th{style: "#{email_table_header_css} width: 1px; white-space: nowrap;"} ID
+      %th{style: "#{email_table_header_css} width: 100%;"} Name
+      %th{style: "#{email_table_header_css} width: 1px; white-space: nowrap; text-align: right;"} Category
+      %th{style: "#{email_table_header_css} width: 1px; white-space: nowrap; text-align: right;"} Component
+  %tbody
+    - @resolved_tickets.each do |ticket|
+      %tr
+        %td{style: "#{email_table_cell_css} width: 1px; white-space: nowrap; font-weight: bold;"}= ticket.identifier
+        %td{style: "#{email_table_cell_css} width: 100%;"}
+          %h5{style: email_bold_header_css}= ticket.name
+          - unless ticket.description.blank?
+            %span{style: email_muted_text_css}= format_description_text(ticket.description)
+        %td{style: "#{email_table_cell_css} width: 1px; white-space: nowrap; text-align: right;"}
+          - if ticket.category.blank?
+            %span{style: email_muted_text_css} None
+          - else
+            %span{style: "#{email_label_css} background-color: #{ticket.category.color};"}= ticket.category.name
+        %td{style: "#{email_table_cell_css} width: 1px; white-space: nowrap; text-align: right;"}
+          - if ticket.component.blank?
+            %span{style: email_muted_text_css} None
+          - else
+            = ticket.component.name

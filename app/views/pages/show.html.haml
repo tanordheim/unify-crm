@@ -1,0 +1,9 @@
+= render '/projects/sidebar'
+
+%header.page-header
+  %h1
+    = page.name
+    %small= project.name
+
+.page-body
+  = page_body(page)

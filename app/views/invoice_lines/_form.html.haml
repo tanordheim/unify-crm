@@ -1,0 +1,18 @@
+%table.table.invoice-lines-form
+  %thead
+    %tr
+      %th.product Product
+      %th.description Description
+      %th.price-per Price per
+      %th.quantity Qty
+      %th.row-actions
+  %tbody
+    = form.simple_fields_for :lines do |line_form|
+      = render partial: '/invoice_lines/field', locals: { form: line_form }
+    %tr.add-first{:'data-association' => 'lines'}
+      %td{colspan: 5}= link_to 'Add a line', '#'
+    %tr.add-another{:'data-association' => 'lines'}
+      %td{colspan: 5}= link_to 'Add another', '#'
+
+= content_for :form_templates do
+  = form_template(form, :lines, partial: '/invoice_lines/field')

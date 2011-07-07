@@ -1,0 +1,5 @@
+<% unless employment.errors.any? -%>
+  $.getScript('/organizations/<%= employment.organization.id.to_s %>/employees', function() {
+    $('tr[data-employment-id="<%= employment.id.to_s %>"] td').effect('highlight', {}, 'fast');
+  });
+<% end %>

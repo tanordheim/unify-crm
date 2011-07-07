@@ -1,0 +1,21 @@
+%span.editable-value
+  %ul.addresses.unstyled
+    %li.title
+      %h3 Addresses
+    - if addressable.addresses.empty?
+      %li
+        %span.muted No addresses
+    - else
+      = render addressable.addresses
+
+%span.editable-form
+  %ul.addresses.unstyled
+    %li.title
+      %h3 Addresses
+    = form.simple_fields_for :addresses do |address_form|
+      = render partial: '/addresses/field', locals: { form: address_form }
+    %li.add-first{:'data-association' => 'addresses'}= link_to 'Add an address', '#'
+    %li.add-another{:'data-association' => 'addresses'}= link_to 'Add another', '#'
+
+= content_for :form_templates do
+  = form_template(form, :addresses)

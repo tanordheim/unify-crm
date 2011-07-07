@@ -1,0 +1,6 @@
+@import 'app-ui/bootstrap/mixins';
+
+table.milestones-table {
+  .name { #table-column > .max-width(); }
+  .starts-on, .ends-on, .closed-at { #table-column > .min-width(); #table-column > .pull-right(); }
+}

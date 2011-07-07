@@ -1,0 +1,98 @@
+= entity_info_form deal do |form|
+  %header.page-header
+    %h1
+      %span.editable-value
+        = deal.name
+      %span.editable-form
+        = form.input_field :name, placeholder: 'Deal name'
+
+    %nav.actions
+      - unless deal.new_record?
+        = link_to icon_tag('edit', 'Edit', color: :white), '#', class: 'btn btn-info btn-small', :'data-start-editing' => true
+        = link_to icon_tag('remove', 'Cancel'), '#', class: 'btn btn-small', :'data-cancel-editing' => true
+      = form.button :submit, icon_tag('ok', 'Save', color: :white), class: 'btn btn-info btn-small'
+    
+  %div.grid
+    %div.grid-6
+      %div.well.description
+        %span.editable-value
+          - if deal.description.blank?
+            %span.muted No description set.
+          - else
+            = format_description_text(deal.description)
+        %span.editable-form
+          = form.input_field :description, as: :text, placeholder: 'Description'
+
+      %div.grid
+        %div.grid-6
+          %div.info-block.pricing
+            %h6 Pricing
+            %span.editable-value
+              - if deal.price.blank?
+                %span.muted No price set.
+              - else
+                = format_currency(deal.total_value)
+                %br
+                = deal_value_details(deal)
+            %span.editable-form
+              = form.input_field :price, placeholder: 'Amount'
+              = form.input_field :price_type, collection: deal_price_type_collection, include_blank: false
+              %span.price-duration
+                for
+                = form.input_field :duration, placeholder: 'Duration'
+                %span.price-duration-classifier.per_hour hours
+                %span.price-duration-classifier.per_month months
+                %span.price-duration-classifier.per_year years
+              
+          %div.info-block.stage
+            %h6 State
+            %span.editable-value
+              In stage
+              = deal_stage_label(deal.stage)
+            %span.editable-form
+              = form.input_field :stage_id, collection: stages, include_blank: false
+
+          - if deal.stage.blank? || !deal.stage.closed?
+            %div.info-block.closing
+              %h6 Closing
+              %span.editable-value
+                - if deal.expecting_close_on.blank?
+                  %span.muted No closing date set
+                - else
+                  Expecting to close on
+                  = l(deal.expecting_close_on, format: :short)
+              %span.editable-form
+                Expecting close on
+                = form.input_field :expecting_close_on, as: :date, placeholder: 'Date'
+              %span.editable-value
+                == #{deal.probability}%
+                chance of closing
+              %span.editable-form
+                = form.input_field :probability, as: :range, min: 0, max: 100
+                %span#probability-percentage
+                  %span
+                  probability
+
+        %div.grid-6
+          %div.info-block.category
+            = render partial: '/categories/entity_category', locals: { entity: deal, form: form }
+
+          %div.info-block.source
+            = render partial: '/sources/entity_source', locals: { entity: deal, form: form }
+
+          %div.info-block.responsible
+            %h6 Responsible
+            %span.editable-value
+              - if deal.user.blank?
+                %span.muted No responsible user
+              - else
+                = link_to deal.user.name, deal.user
+            %span.editable-form
+              = form.input_field :user_id, collection: users, include_blank: false
+
+    %div.grid-6
+      %div.info-block.organization
+        = render partial: '/organizations/entity_organization', locals: { entity: deal, form: form }
+
+      %div.info-block.person
+        = render partial: '/people/entity_person', locals: { entity: deal, form: form }

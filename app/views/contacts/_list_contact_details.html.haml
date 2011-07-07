@@ -1,0 +1,12 @@
+%dl
+  - unless contact.email_addresses.primary.blank?
+    %dt E-mail:
+    %dd
+      = link_to_email contact.email_addresses.primary.address
+      %small.muted= email_address_location_name(contact.email_addresses.primary.location_name)
+
+  - %w(work mobile).each do |type|
+    - number = contact.phone_numbers.send(type.to_sym)
+    - unless number.blank?
+      %dt== #{type.titleize}:
+      %dd= number.number

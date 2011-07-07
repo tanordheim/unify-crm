@@ -1,0 +1,10 @@
+%tr
+  %td.username= link_to user.username, user
+  %td.name= user.name
+  %td.title= user.title
+  %td.email
+    - unless user.email_addresses.primary.blank?
+      = link_to user.email_addresses.primary.address, "mailto:#{user.email_addresses.primary.address}"
+  %td.phone-number
+    - unless user.phone_numbers.primary.blank?
+      = user.phone_numbers.primary.number

@@ -1,0 +1,8 @@
+%ul.unstyled
+  = form.simple_fields_for :attachments do |a_form|
+    = render partial: '/ledger_transaction_attachments/field', locals: { form: a_form }
+  %li.add-first{:'data-association' => 'attachments'}= link_to 'Add an attachment', '#'
+  %li.add-another{:'data-association' => 'attachments'}= link_to 'Add another', '#'
+
+= content_for :form_templates do
+  = form_template(form, :attachments, partial: '/ledger_transaction_attachments/field')

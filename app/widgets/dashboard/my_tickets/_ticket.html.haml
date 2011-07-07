@@ -1,0 +1,12 @@
+%tr{:'data-ticket-id' => ticket.id, class: ticket_css_class(ticket)}
+  %td.id= link_to ticket.identifier, url_for_event(:show, ticket_id: ticket.id), remote: true
+  %td.name= ticket.name
+  %td.category= category_label(ticket.category)
+  %td.status= ticket_status(ticket)
+  %td.row-actions
+    - if ticket.open?
+      = link_to content_tag(:span, '', class: 'ui-icon ui-icon-play'), url_for_event(:start, ticket_id: ticket.id), remote: true, class: 'start-progress-action'
+    - elsif ticket.in_progress?
+      = link_to content_tag(:span, '', class: 'ui-icon ui-icon-pause'), url_for_event(:stop, ticket_id: ticket.id), remote: true, class: 'stop-progress-action'
+    - unless ticket.closed?
+      = link_to content_tag(:span, '', class: 'ui-icon ui-icon-stop'), url_for_event(:close, ticket_id: ticket.id), remote: true, class: 'close-action', confirm: 'Are you sure you want to close this ticket?'

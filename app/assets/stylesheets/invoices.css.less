@@ -1,0 +1,24 @@
+@import 'app-ui/bootstrap/mixins';
+
+table.invoices-table {
+  .id { #table-column > .min-width(); }
+  .organization { #table-column > .max-width(); }
+  .amount { #table-column > .min-width(); #table-column > .pull-right(); }
+  .billed-on { #table-column > .min-width(); #table-column > .pull-right(); }
+  .due-on { #table-column > .min-width(); #table-column > .pull-right(); }
+  .state { #table-column > .min-width(); #table-column > .pull-right(); }
+}
+
+table.invoice-lines-table, table.invoice-lines-form {
+  .product { #table-column > .min-width(); }
+  .description { #table-column > .max-width(); }
+  .price-per { #table-column > .min-width(); #table-column > .pull-right(); }
+  .quantity { #table-column > .min-width(); #table-column > .pull-right(); }
+  .tax-percentage { #table-column > .min-width(); #table-column > .pull-right(); }
+  .total { #table-column > .min-width(); #table-column > .pull-right(); }
+}
+
+table.invoice-payments-table {
+  .date, .amount { #table-column > .min-width(); }
+  .payment-form { #table-column > .max-width(); }
+}

@@ -1,0 +1,5 @@
+<% unless website.errors.any? -%>
+  $.getScript('/<%= websiteable_type.to_s.pluralize %>/<%= websiteable_id %>/websites', function() {
+    $('li[data-website-id="<%= website.id.to_s %>"]').effect('highlight', {}, 'fast');
+  });
+<% end %>

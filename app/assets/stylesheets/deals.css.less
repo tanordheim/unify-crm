@@ -1,0 +1,20 @@
+@import 'app-ui/bootstrap/mixins';
+
+table.deals-table {
+  .name { #table-column > .max-width(); }
+  .organization { #table-column > .min-width(); }
+  .responsible { #table-column > .min-width(); #table-column > .pull-right(); }
+  .amount {
+    #table-column > .min-width();
+    #table-column > .pull-right();
+
+    small {
+      color: #bfbfbf;
+      font-size: 10px;
+      display: block;
+    }
+  }
+  .stage { #table-column > .min-width(); #table-column > .pull-right(); }
+  .probability { #table-column > .min-width(); #table-column > .pull-right(); }
+  .expecting-close-on { #table-column > .min-width(); #table-column > .pull-right(); }
+}

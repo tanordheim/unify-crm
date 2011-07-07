@@ -1,0 +1,5 @@
+<% unless email_address.errors.any? -%>
+  $.getScript('/<%= emailable_type.to_s.pluralize %>/<%= emailable_id %>/email_addresses', function() {
+    $('li[data-email-address-id="<%= email_address.id.to_s %>"]').effect('highlight', {}, 'fast');
+  });
+<% end %>

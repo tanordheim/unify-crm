@@ -1,0 +1,15 @@
+= render '/projects/sidebar'
+
+%header.page-header
+  %h1
+    Milestones
+    %small= project.name
+  %ul.filter
+    %li.text Showing
+    %li.dropdown
+      = filter_for :state
+    %li.text milestones matching
+    %li.search
+      = filter_for :keywords
+
+= render 'milestones'

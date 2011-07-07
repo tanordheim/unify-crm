@@ -1,0 +1,7 @@
+$.closeModal();
+<% if source.errors.any? -%>
+  $.modal("Add new source", "<%= escape_javascript(render('form')) %>");
+<% else -%>
+  $('table.sources-table').replaceWith("<%= escape_javascript(render('sources')) %>");
+  $('tr[data-source-id="<%= source.id %>"]').effect('highlight', {}, 500);
+<% end -%>

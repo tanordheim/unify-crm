@@ -1,0 +1,5 @@
+= render partial: '/comments/form', locals: { commentable: contact, placeholder: "Add a comment for #{contact.name}" }
+
+%div.comments
+  = render self.comments
+  = paginate self.comments
